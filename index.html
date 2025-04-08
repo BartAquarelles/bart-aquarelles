@@ -265,9 +265,14 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			
-			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+			
 
-
+<form action="https://formspree.io/f/xanelgol" method="POST">
+  <input type="text" name="name" placeholder="Nom" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <textarea name="message" placeholder="Message" required></textarea>
+  <button type="submit">Envoyer</button>
+</form>
 
 
 
@@ -354,47 +359,8 @@ function toggleMenu() {
     document.body.classList.toggle("menu-open");
 }
 			</script>
-					
 
 
-			
-					  
-
-<script type="text/javascript">
-	emailjs.init("lJjscvHd1X1-bfzAj");
-
-    // Quand le formulaire est soumis
-	document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault();  // Empêche l'envoi classique du formulaire
-
-    // Récupérer les valeurs du formulaire
-    var nom = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var category = document.getElementById("category").value;
-    var message = document.getElementById("message").value;
-    // var urgence = document.getElementById("name").checked ? "Oui" : "Non"; // Si la case est cochée ou non
-
-    // Crée un objet avec les données à envoyer à EmailJS
-    var templateParams = {
-        name: nom,
-        email: email,
-        message: message,
-        category: category,
-        // urgence: urgence
-    };
-
-    // Envoi du message via EmailJS
-    emailjs.send('service_9r7t0k9', 'template_xa7tg9f', templateParams)
-        .then(function(response) {
-            console.log('Succès de l\'envoi du message', response);
-            alert("Votre message a bien été envoyé !");
-        }, function(error) {
-            console.log('Erreur lors de l\'envoi du message', error);
-            alert("Une erreur est survenue, veuillez réessayer.");
-        });
-});
-
-</script>
 				
 	</body>
 </html>
