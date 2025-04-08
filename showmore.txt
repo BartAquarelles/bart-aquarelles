@@ -1,0 +1,105 @@
+/* Style du bouton "Voir plus" */
+.show-more {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 40px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px; /* Rend le bouton bien arrondi */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+    
+    /* Dégradé sur le contour */
+    background: linear-gradient(135deg, #0d0d0e, #d6d8d8);
+    padding: 3px; /* Pour éviter que l'effet de bordure prenne trop de place */
+}
+
+/* Création du fond transparent avec un contour dégradé */
+.show-more::before {
+    content: "Voir plus";
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Garamond', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: white; /* Fond transparent avec contour visible */
+    border-radius: 50px;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: white;
+	text-transform: none;
+}
+
+/* Effet au survol */
+.show-more:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #d6d8d8, #0d0d0e);
+}
+
+.show-more:hover::before {
+    background-image: white;
+}
+
+/* Effet d’onde au clic */
+.show-more:active {
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				const showMoreButton = document.querySelector('.show-more');
+const moreItems = document.querySelectorAll('.gallery-item.more');
+
+showMoreButton.addEventListener('click', function() {
+    moreItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.style.display = 'block'; // D'abord, on affiche l'élément
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 50); // Petit délai pour déclencher l'animation après display:block
+        }, index * 200); // Décalage progressif (200ms entre chaque apparition)
+    });
+
+    // Cacher le bouton une fois qu'on a tout affiché
+    setTimeout(() => {
+        showMoreButton.style.display = 'none';
+    }, moreItems.length * 200);
+});
+
