@@ -3682,8 +3682,8 @@ input, select, textarea {
 	
 /* Barre de séparation stylisée */
 .scroll-line {
-    position: absolute;
-    top: 770px; /* Ajuste cette valeur pour la placer au bon endroit */
+    position: relative;
+    top: 68px; /* Ajuste cette valeur pour la placer au bon endroit */
     left: 50%;
     transform: translateX(-50%);
     width: 10px; /* Débute comme un petit point */

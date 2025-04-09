@@ -44,13 +44,15 @@
 				</div>
 			</section>
 
-			<!-- Petite barre sympatoche -->
-			<div class="scroll-line"></div>
+			
+			
 
 
 			<!-- Galerie -->
 <section id="gallery">
-    <div class="inner">
+    <!-- Petite barre sympatoche -->
+	<div class="scroll-line"></div>
+	<div class="inner">
         <h2>Ma Galerie</h2>
         <p>Quelques pigments, un peu d'eau, beaucoup de rêves</p>
         <div class="gallery-grid">
@@ -264,7 +266,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			
+			<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 			
 
 <form action="https://formspree.io/f/xanelgol" method="POST">
@@ -359,7 +361,41 @@ function toggleMenu() {
     document.body.classList.toggle("menu-open");
 }
 			</script>
+<script type="text/javascript">
+	emailjs.init("lJjscvHd1X1-bfzAj");
 
+	// Quand le formulaire est soumis
+	document.querySelector("form").addEventListener("submit", function(event) {
+	event.preventDefault();  // Empêche l'envoi classique du formulaire
+
+	// Récupérer les valeurs du formulaire
+	var nom = document.getElementById("name").value;
+	var email = document.getElementById("email").value;
+	var category = document.getElementById("category").value;
+	var message = document.getElementById("message").value;
+	// var urgence = document.getElementById("name").checked ? "Oui" : "Non"; // Si la case est cochée ou non
+
+	// Crée un objet avec les données à envoyer à EmailJS
+	var templateParams = {
+		name: nom,
+		email: email,
+		message: message,
+		category: category,
+		// urgence: urgence
+	};
+
+	// Envoi du message via EmailJS
+	emailjs.send('service_9r7t0k9', 'template_xa7tg9f', templateParams)
+		.then(function(response) {
+			console.log('Succès de l\'envoi du message', response);
+			alert("Votre message a bien été envoyé !");
+		}, function(error) {
+			console.log('Erreur lors de l\'envoi du message', error);
+			alert("Une erreur est survenue, veuillez réessayer.");
+		});
+});
+
+</script>
 
 				
 	</body>
