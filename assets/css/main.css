@@ -3824,3 +3824,9 @@ html {
     transform: scale(1.2);
     color: rgb(138, 14, 14);
 }
+
+
+#form {
+    margin-left: 4em;
+    margin-right: 4em;
+}
