@@ -57,16 +57,20 @@
         <p>Quelques pigments, un peu d'eau, beaucoup de rêves</p>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="assets/css/images/bateau.jpg" alt="Aquarelle 1">
-                <p>-Quêtes d'horizons-</p>
+                <img src="assets/css/images/bateau.jpg" alt="Aquarelle 1" 
+				data-description="Un paysage aquarellé au bord de mer."
+				data-dimensions="20x30 cm"
+				data-dispo="Disponible"
+				data-titre="Quêtes d'horizons">
+                <p>Quêtes d'horizons</p>
             </div>
             <div class="gallery-item">
                 <img src="assets/css/images/image_accueil.jpg" alt="Aquarelle 2">
-                <p>-Larmes sans encre-</p>
+                <p>Larmes sans encre</p>
             </div>
 			<div class="gallery-item">
                 <img src="assets/css/images/eglise.jpg" alt="Aquarelle 3">
-                <p>-Flocons et quiétude-</p>
+                <p>Flocons et quiétude</p>
             </div>
 			
 			<div class="gallery-item more">
@@ -226,10 +230,10 @@
 								<div class="col-12">
 									<select name="category" id="category">
 										<option value="">- Nature de la demande -</option>
-										<option value="1">Aquarelles</option>
-										<option value="1">Marque-page</option>
-										<option value="1">Mariage</option>
-										<option value="1">Autre...</option>
+										<option value="Aquarelles">Aquarelles</option>
+										<option value="Marque-page">Marque-page</option>
+										<option value="Mariage">Mariage</option>
+										<option value="Autre...">Autre...</option>
 									</select>
 								</div>
 								<div class="col-6 col-12-small">
@@ -258,6 +262,45 @@
 					<li><a href="#" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
 				</ul>
 			</section>
+
+
+
+<!-- Lightbox / Modal -->
+<div id="galleryModal" class="modal">
+	<div class="close-button-modal" onclick="toggleModal()">✖</div>
+	<div class="modal-content">
+		<h2 id="modalTitre"></h2>
+        <p>Description détaillée</p>
+	  <img id="modalImage" src="" alt="">
+	  <div class="modal-description">
+		<p id="modalText"></p>
+		<p id="modalDimensions"></p>
+		<p id="modalDisponibilite"></p>
+		<p>NB : Toutes les aquarelles sont livrées avec un cadre. Les oeuvres originales sont délivrées avec leur certificat d'authenticité. </p>
+  
+		<div class="actions">
+		  <div class="col-6 col-12-small">
+			<input type="checkbox" id="achat" name="achat">
+			<label for="achat">Je souhaite me procurer une copie imprimée</label>
+		</div>
+		<div class="col-6 col-12-small">
+			<input type="checkbox" id="prix" name="prix">
+			<label for="prix">Je préfèrerais acquérir l'oeuvre originale</label>
+		</div>
+  
+		<div id="prixInputContainer" style="display:none;">
+		  <label for="proposedPrice">Votre proposition :</label>
+		  <input type="text" id="proposedPrice" placeholder="Veuillez entrer un motant">
+		</div>
+  
+		<button id="envoyerBtn">Envoyer</button>
+	  </div>
+	</div>
+  </div>
+  
+
+
+
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -364,7 +407,7 @@ function toggleMenu() {
 	var email = document.getElementById("email").value;
 	var category = document.getElementById("category").value;
 	var message = document.getElementById("message").value;
-	// var urgence = document.getElementById("name").checked ? "Oui" : "Non"; // Si la case est cochée ou non
+	var urgence = document.getElementById("name").checked ? "Oui" : "Non"; // Si la case est cochée ou non
 
 	// Crée un objet avec les données à envoyer à EmailJS
 	var templateParams = {
@@ -372,7 +415,7 @@ function toggleMenu() {
 		email: email,
 		message: message,
 		category: category,
-		// urgence: urgence
+		urgence: urgence
 	};
 
 	// Envoi du message via EmailJS
@@ -387,6 +430,93 @@ function toggleMenu() {
 });
 
 </script>
+
+
+
+
+<script>
+	// Script concernant la modale 
+
+	const modal = document.getElementById("galleryModal");
+	const modalImage = document.getElementById("modalImage");
+	const modalText = document.getElementById("modalText");
+	const modalDimensions = document.getElementById("modalDimensions");
+	const modalDisponibilite = document.getElementById("modalDisponibilite");
+	const prixInputContainer = document.getElementById("prixInputContainer");
+	const envoyerBtn = document.getElementById("envoyerBtn");
+	const modalTitre = document.getElementById("modalTitre");
+  
+	// ouverture de la modale
+	document.querySelectorAll('.gallery-item img').forEach(img => {
+	  img.addEventListener('click', () => {
+		modal.style.display = 'flex';
+		modalTitre.textContent = img.dataset.titre;
+		modalImage.src = img.src;
+		modalText.textContent = img.dataset.description;
+		modalDimensions.textContent = "Dimensions : " + img.dataset.dimensions;
+		modalDisponibilite.textContent = "Disponibilité : " + img.dataset.dispo;
+		prixInputContainer.style.display = 'none';
+		modal.classList.add("show");
+	  });
+	});
+  
+	document.getElementById("prix").addEventListener("click", () => {
+	  prixInputContainer.style.display = 'block';
+	});
+
+	envoyerBtn.addEventListener("click", () => {
+	  const image = modalImage.src;
+	  const description = modalText.textContent;
+	  const dimensions = modalDimensions.textContent;
+	  const disponibilite = modalDisponibilite.textContent;
+	  const proposition = document.getElementById("proposedPrice").value;
+  
+	  const templateParams = {
+		image: image,
+		description: description,
+		dimensions: dimensions,
+		disponibilite: disponibilite,
+		proposition: proposition || "Demande de copie imprimée"
+	  };
+  
+	  emailjs.send('TON_SERVICE_ID', 'TON_TEMPLATE_ID', templateParams)
+		.then(response => {
+		  alert("Message envoyé !");
+		  modal.style.display = "none";
+		}, error => {
+		  alert("Erreur lors de l'envoi.");
+		  console.log(error);
+		});
+	});
+
+
+	// détection de l'orientation de l'image
+	const modalImage1 = document.querySelector('.modal-content img');
+
+modalImage1.onload = function () {
+  const { naturalWidth, naturalHeight } = modalImage1;
+
+  if (naturalHeight > naturalWidth) {
+    modalImage1.classList.remove('horizontal');
+    modalImage1.classList.add('vertical');
+  } else {
+    modalImage1.classList.remove('vertical');
+    modalImage1.classList.add('horizontal');
+  }
+};
+
+function toggleModal() {
+    modal.style.display = "none";
+	modal.classList.remove("show");
+}
+
+
+  </script>
+
+
+
+  
+
 
 				
 	</body>

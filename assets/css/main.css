@@ -3683,7 +3683,7 @@ input, select, textarea {
 /* Barre de séparation stylisée */
 .scroll-line {
     position: relative;
-    top: 68px; /* Ajuste cette valeur pour la placer au bon endroit */
+    top: 4em; /* Ajuste cette valeur pour la placer au bon endroit */
     left: 50%;
     transform: translateX(-50%);
     width: 10px; /* Débute comme un petit point */
@@ -3829,4 +3829,97 @@ html {
 #form {
     margin-left: 4em;
     margin-right: 4em;
+}
+
+
+
+/* Appliquer une transition fluide à la modale */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0; top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.7);
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+	font-family: 'Garamond', sans-serif;
+	
+  }
+  
+  /* Quand elle est active */
+  .modal.show {
+	display: flex;
+	opacity: 1;
+  }
+  
+  /* Contenu de la modale */
+  .modal-content {
+	background-color: white;
+	padding: 2em;
+	max-width: 90%;
+	max-height: 90%;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	border-radius: 10px;
+	animation: scaleUp 0.3s ease;
+  }
+  
+  /* Image responsive - verticales ou horizontales */
+  #modalImage {
+	max-width: 100%;
+	max-height: 70vh;
+	object-fit: contain;
+	display: block;
+	margin: 0 auto;
+	border-radius: 0.5em;
+  }
+  
+  /* Petit effet d’apparition */
+  @keyframes scaleUp {
+	from {
+	  transform: scale(0.9);
+	  opacity: 0;
+	}
+	to {
+	  transform: scale(1);
+	  opacity: 1;
+	}
+  }
+  
+  /* Textes & layout */
+  .modal-description {
+	text-align: left;
+  }
+  
+  .actions {
+	display: flex;
+	gap: 1em;
+	flex-wrap: wrap;
+  }
+  
+  #prixInputContainer {
+	margin-top: 1em;
+  }
+  
+
+  /* ===== Bouton de fermeture (croix) ===== */
+.close-button-modal {
+    position: absolute;
+    top: 2em;
+    right: 7em;
+    font-size: 24px;
+    color: rgb(123, 121, 121);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.close-button-modal:hover {
+    transform: scale(1.2);
+    color: rgb(138, 14, 14);
 }
