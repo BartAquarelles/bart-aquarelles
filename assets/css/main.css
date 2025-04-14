@@ -3418,6 +3418,7 @@ input, select, textarea {
 			#header {
 				padding: 4em 3em 4em 3em ;
 				background-position: center top;
+				background-image: url("images/image_accueil_phone.jpg");
 			}
 
 				#header .actions {
@@ -3456,6 +3457,7 @@ input, select, textarea {
 			#header {
 				padding: 4em 2em 4em 2em ;
 				background-position: center top;
+				background-image: url("images/image_accueil_phone.jpg");
 			}
 
 				#header br {
@@ -3506,6 +3508,7 @@ input, select, textarea {
 			#header {
 				padding: 3em 1em 3em 1em ;
 				background-position: center top;
+				background-image: url("images/image_accueil_phone.jpg");
 			}
 
 		/* Footer */
