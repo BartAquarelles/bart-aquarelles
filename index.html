@@ -50,11 +50,12 @@
 
 			<!-- Galerie -->
 <section id="gallery">
-    <!-- Petite barre sympatoche -->
-	<div class="scroll-line"></div>
+    <!-- Petite barre sympatoche -->	
 	<div class="inner">
-        <h2>Ma Galerie</h2>
-        <p>Quelques pigments, un peu d'eau, beaucoup de rêves</p>
+		
+        <h2 style="margin-bottom: 0.5em;">Ma Galerie</h2>
+		<div class="scroll-line"></div>
+        <p style="margin-top: 0.5em;">Quelques pigments, un peu d'eau, beaucoup de rêves</p>
         <div class="gallery-grid">
             <div class="gallery-item">
                 <img src="assets/css/images/bateau.jpg" alt="Aquarelle 1" 
@@ -269,8 +270,9 @@
 
 <!-- Lightbox / Modal -->
 <div id="galleryModal" class="modal">
-	<div class="close-button-modal" onclick="toggleModal()">✖</div>
 	<div class="modal-content">
+		<!-- Il faut mettre ici le close-button-modal pour qu'il puisse bien s'imbriquer dans le modal-content et pour s'assurer que le position relative est correctement appliqué ! -->
+		<div class="close-button-modal" onclick="toggleModal()">✖</div>
 		<header class="major">
 		<h2 id="modalTitre" style="margin-bottom: 0em;"></h2>
 		</header>

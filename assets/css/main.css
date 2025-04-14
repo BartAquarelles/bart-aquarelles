@@ -3683,7 +3683,7 @@ input, select, textarea {
 /* Barre de séparation stylisée */
 .scroll-line {
     position: relative;
-    top: 4em; /* Ajuste cette valeur pour la placer au bon endroit */
+    top: 0%; /* Ajuste cette valeur pour la placer au bon endroit */
     left: 50%;
     transform: translateX(-50%);
     width: 10px; /* Débute comme un petit point */
@@ -3871,6 +3871,7 @@ html {
   
   /* Contenu de la modale */
   .modal-content {
+	position: relative; /* permet au bouton d'être positionné à l'intérieur */
 	background-color: white;
 	padding: 2em;
 	max-width: 90%;
@@ -3882,6 +3883,23 @@ html {
 	border-radius: 10px;
 	animation: scaleUp 0.3s ease;
   }
+
+
+    /* ===== Bouton de fermeture (croix) ===== */
+.close-button-modal {
+	position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 24px;
+    color: rgb(123, 121, 121);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.close-button-modal:hover {
+    transform: scale(1.2);
+    color: rgb(138, 14, 14);
+}
   
   /* Image responsive - verticales ou horizontales */
   #modalImage {
@@ -3928,21 +3946,7 @@ html {
     opacity: 1;
 }
 
-  /* ===== Bouton de fermeture (croix) ===== */
-.close-button-modal {
-    position: absolute;
-    top: 2em;
-    right: 7em;
-    font-size: 24px;
-    color: rgb(123, 121, 121);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
 
-.close-button-modal:hover {
-    transform: scale(1.2);
-    color: rgb(138, 14, 14);
-}
 
 #envoyerCopieInputContainer {
 	font-family: Garamond, sans serif;
