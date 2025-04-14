@@ -476,7 +476,8 @@ function toggleMenu() {
 	const modalDisponibilite = document.getElementById("modalDisponibilite");
 	const prixInputContainer = document.getElementById("prixInputContainer");
 	const copieInputContainer = document.getElementById("copieInputContainer");
-	const envoyerBtn = document.getElementById("envoyerBtn");
+	const envoyerPrixInputContainer = document.getElementById("envoyerPrixInputContainer");
+	const envoyerCopieInputContainer = document.getElementById("envoyerCopieInputContainer");
 	const modalTitre = document.getElementById("modalTitre");
 	const modalPriceCadre = document.getElementById("modalPriceCadre");
 	const modalPriceSansCadre = document.getElementById("modalPriceSansCadre");
@@ -524,22 +525,63 @@ function toggleMenu() {
     }
   });
 
-	envoyerBtn.addEventListener("click", () => {
-	  const image = modalImage.src;
+	envoyerPrixInputContainer.addEventListener("click", () => {
+	  const titre = "achat d'une oeuvre originale";
+		const image = modalImage.src;
 	  const description = modalText.textContent;
 	  const dimensions = modalDimensions.textContent;
 	  const disponibilite = modalDisponibilite.textContent;
 	  const proposition = document.getElementById("proposedPrice").value;
+	  const name = document.getElementById("name").value;
+	  const email = document.getElementById("email").value;
+	  const cadre = "Oui";
   
 	  const templateParams = {
-		image: image,
+		image: image,	
 		description: description,
 		dimensions: dimensions,
 		disponibilite: disponibilite,
-		proposition: proposition || "Demande de copie imprimée"
+		proposition: proposition || "Demande de copie imprimée",
+		name: name,
+		email: email,
+		titre: titre,
+		cadre: cadre
 	  };
   
-	  emailjs.send('service_9r7t0k9', 'TON_TEMPLATE_ID', templateParams)
+	  emailjs.send('service_9r7t0k9', 'template_5ktscfe', templateParams)
+		.then(response => {
+		  alert("Message envoyé !");
+		  modal.style.display = "none";
+		}, error => {
+		  alert("Erreur lors de l'envoi.");
+		  console.log(error);
+		});
+	});
+
+	envoyerCopieInputContainer.addEventListener("click", () => {
+	  const titre = "Achat d'une copie imprimée";
+		const image = modalImage.src;
+	  const description = modalText.textContent;
+	  const dimensions = modalDimensions.textContent;
+	  const disponibilite = modalDisponibilite.textContent;
+	  const proposition = "-pas de proposition-";
+	  const name = document.getElementById("name").value;
+	  const email = document.getElementById("email").value;
+	  var cadre = document.getElementById("selectPriceCadre").checked ? "Oui" : "Non";
+  
+	  const templateParams = {
+		image: image,	
+		description: description,
+		dimensions: dimensions,
+		disponibilite: disponibilite,
+		proposition: proposition || "Demande de copie imprimée",
+		name: name,
+		email: email,
+		titre: titre,
+		cadre: cadre
+	  };
+  
+	  emailjs.send('service_9r7t0k9', 'template_5ktscfe', templateParams)
 		.then(response => {
 		  alert("Message envoyé !");
 		  modal.style.display = "none";
