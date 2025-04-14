@@ -3114,7 +3114,7 @@ input, select, textarea {
 		background-color: #4686a0;
 		color: rgba(255, 255, 255, 0.75);
 		background-attachment: fixed,							fixed,							fixed;
-		background-image: url("images/overlay2.png"), url("images/overlay4.svg"), linear-gradient(45deg, #4361c2, #4fa49a 50%, #9dc66b 95%);
+		background-image: url("images/footer_picture.png");
 		background-position: top left,						center center,					center center;
 		background-size: auto,							cover,							cover;
 		text-align: center;
@@ -3708,6 +3708,19 @@ input, select, textarea {
     opacity: 1;
 }
 
+.scroll-line3 {
+    position: relative;
+    top: -50px; /* Ajuste cette valeur pour la placer au bon endroit */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 3px;
+    background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
+    border-radius: 50px;
+    transition: width 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 1;
+}
+
 
 /* ===== Bouton Menu ===== */
 
@@ -3903,10 +3916,17 @@ html {
 	flex-wrap: wrap;
   }
   
-  #prixInputContainer {
-	margin-top: 1em;
-  }
   
+  .modal-line {
+    position: relative;
+    top: 20em; /* Ajuste cette valeur pour la placer au bon endroit */
+    left: 50%;
+    width: 10em; /* Débute comme un petit point */
+    height: 3px;
+    background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
+    border-radius: 50px;
+    opacity: 1;
+}
 
   /* ===== Bouton de fermeture (croix) ===== */
 .close-button-modal {
@@ -3923,3 +3943,27 @@ html {
     transform: scale(1.2);
     color: rgb(138, 14, 14);
 }
+
+#envoyerCopieInputContainer {
+	font-family: Garamond, sans serif;
+	letter-spacing: 0em;
+}
+
+#envoyerPrixInputContainer {
+	font-family: Garamond, sans serif;
+	letter-spacing: 0em;
+}
+
+#prixInputContainer {
+	display: none;
+	width: 100%;
+	clear: both;
+	margin-top: 1em;
+  }
+
+  #copieInputContainer {
+	display: none;
+	width: 100%;
+	clear: both;
+	margin-top: 1em;
+  }

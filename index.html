@@ -61,7 +61,9 @@
 				data-description="Un paysage aquarellé au bord de mer."
 				data-dimensions="20x30 cm"
 				data-dispo="Disponible"
-				data-titre="Quêtes d'horizons">
+				data-titre="Quêtes d'horizons"
+				data-pricesanscadre="Copie aux dimensions originales sans cadre : 15€"
+				data-pricecadre="Copie aux dimensions originales avec cadre : 25€">
                 <p>Quêtes d'horizons</p>
             </div>
             <div class="gallery-item">
@@ -197,15 +199,15 @@
 
 
 				<!-- contact-->
-				<section id="contact" class="main style1">
-					<div class="scroll-line2"></div>
+				<section id="contact" class="main style1" style="margin-bottom: -7em;">
+					<div class="scroll-line3"></div>
 					<div class="container">
 						<div class="row gtr-150">
 							<div class="col-6 col-12-medium">
 								<header class="major">
 									<h2>Contact</h2>
 								</header>
-								<p>Si vous désirez prendre contact pour <br />
+								<p>Si vous avez un projet et désirez prendre contact pour en parler, n'hésitez pas à remplir le formulaire ci-dessous et à l'envoyer. Vous serez ensuite contactés en retour dans les plus brefs délais. Nous serons ravis de pouvoir travailler avec vous et de faire en sorte de rendre votre rêve aquarellement réalisable !<br />
 							</p>
 							</div>
 							<div class="col-6 col-12-medium imp-medium">
@@ -269,31 +271,56 @@
 <div id="galleryModal" class="modal">
 	<div class="close-button-modal" onclick="toggleModal()">✖</div>
 	<div class="modal-content">
-		<h2 id="modalTitre"></h2>
-        <p>Description détaillée</p>
-	  <img id="modalImage" src="" alt="">
+		<header class="major">
+		<h2 id="modalTitre" style="margin-bottom: 0em;"></h2>
+		</header>
+		<div class="modal-line"></div>
+        <p style="margin-top: -3em;">Description détaillée</p>
+	  <img id="modalImage" style="margin-top: -2em" src="" alt="">
 	  <div class="modal-description">
-		<p id="modalText"></p>
-		<p id="modalDimensions"></p>
-		<p id="modalDisponibilite"></p>
-		<p>NB : Toutes les aquarelles sont livrées avec un cadre. Les oeuvres originales sont délivrées avec leur certificat d'authenticité. </p>
+		<p id="modalText" style="margin-bottom: 0em;"></p>
+		<p id="modalDimensions" style="margin-bottom: 0em;"></p>
+		<p id="modalDisponibilite" style="margin-bottom: 0em;"></p>
+		<p style="margin-bottom: 0.5em;">NB : Toutes les aquarelles sont livrées avec un cadre. Les oeuvres originales sont délivrées avec leur certificat d'authenticité. </p>
   
 		<div class="actions">
 		  <div class="col-6 col-12-small">
-			<input type="checkbox" id="achat" name="achat">
-			<label for="achat">Je souhaite me procurer une copie imprimée</label>
+			<input type="checkbox" id="copie" name="copie">
+			<label for="copie">Je souhaite me procurer une copie imprimée</label>
 		</div>
 		<div class="col-6 col-12-small">
 			<input type="checkbox" id="prix" name="prix">
 			<label for="prix">Je préfèrerais acquérir l'oeuvre originale</label>
 		</div>
+
+		<div id="prixInputContainer" style="display:none;" style="margin-bottom: 1.5em;">
+			<p style="margin-top: -2em; margin-bottom: 0em;">Votre proposition :</p>
+			<input type="text" id="proposedPrice" placeholder="Veuillez entrer un montant" style="margin-bottom: 0.5em;">
+			<input type="text" id="name" placeholder="Nom" style="margin-bottom: 0.5em;">
+			<input type="text" id="email" placeholder="Adresse mail" style="margin-bottom: 0.5em;">
+			  <button id="envoyerPrixInputContainer">Envoyer la requête</button>
+			</div>
   
-		<div id="prixInputContainer" style="display:none;">
-		  <label for="proposedPrice">Votre proposition :</label>
-		  <input type="text" id="proposedPrice" placeholder="Veuillez entrer un motant">
+		<div id="copieInputContainer" style="display:none;" style="margin-bottom: 0em;">
+			<!-- Affichage des prix -->
+			<i><p id="modalPriceCadre" style="margin-bottom: 0em;"></p></i>
+			<i><p id="modalPriceSansCadre" style="margin-bottom: 0.5em;"></p></i>
+			<div class="col-6 col-12-small">
+				<input type="checkbox" id="selectPriceCadre" name="cadre" style="margin-bottom: 0.5em;">
+				<label for="selectPriceCadre">Choisir avec cadre</label>
+			</div>
+			<div class="col-6 col-12-small">
+				<input type="checkbox" id="selectPriceSansCadre" name="sanscadre" style="margin-bottom: 0.5em;">
+				<label for="selectPriceSansCadre">Choisir sans cadre</label>
+			</div>
+			<input type="text" id="name" placeholder="Nom" style="margin-bottom: 0.5em;">
+			<input type="text" id="email" placeholder="Adresse mail" style="margin-bottom: 1em;">
+			<button id="envoyerCopieInputContainer">Envoyer la requête</button>
+
 		</div>
+
   
-		<button id="envoyerBtn">Envoyer</button>
+		
 	  </div>
 	</div>
   </div>
@@ -309,12 +336,18 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<!-- chargement du fichier EmailJS -->
 			<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 			
 
 			<!-- un peu de java -->
 
 			<script>
+	// fait pour automatiser le saut de ligne quand on écrit /n
+	document.querySelectorAll('[data-price]').forEach(el => {
+  const text = el.getAttribute('data-price').replace(/\n/g, '<br>');
+  el.innerHTML = text;
+});
 
 const showMoreButton = document.querySelector('.show-more');
 const moreItems = document.querySelectorAll('.gallery-item.more');
@@ -436,26 +469,32 @@ function toggleMenu() {
 
 <script>
 	// Script concernant la modale 
-
 	const modal = document.getElementById("galleryModal");
 	const modalImage = document.getElementById("modalImage");
 	const modalText = document.getElementById("modalText");
 	const modalDimensions = document.getElementById("modalDimensions");
 	const modalDisponibilite = document.getElementById("modalDisponibilite");
 	const prixInputContainer = document.getElementById("prixInputContainer");
+	const copieInputContainer = document.getElementById("copieInputContainer");
 	const envoyerBtn = document.getElementById("envoyerBtn");
 	const modalTitre = document.getElementById("modalTitre");
+	const modalPriceCadre = document.getElementById("modalPriceCadre");
+	const modalPriceSansCadre = document.getElementById("modalPriceSansCadre");
   
 	// ouverture de la modale
 	document.querySelectorAll('.gallery-item img').forEach(img => {
 	  img.addEventListener('click', () => {
+		// chargement de toutes les data
 		modal.style.display = 'flex';
 		modalTitre.textContent = img.dataset.titre;
+		modalPriceCadre.textContent = img.dataset.pricecadre;
+		modalPriceSansCadre.textContent = img.dataset.pricesanscadre;
 		modalImage.src = img.src;
 		modalText.textContent = img.dataset.description;
 		modalDimensions.textContent = "Dimensions : " + img.dataset.dimensions;
 		modalDisponibilite.textContent = "Disponibilité : " + img.dataset.dispo;
 		prixInputContainer.style.display = 'none';
+		copieInputContainer.style.display = 'none';
 		modal.classList.add("show");
 	  });
 	});
@@ -463,6 +502,27 @@ function toggleMenu() {
 	document.getElementById("prix").addEventListener("click", () => {
 	  prixInputContainer.style.display = 'block';
 	});
+
+	const prixCheckbox = document.getElementById("prix");
+  prixCheckbox.addEventListener("change", () => {
+    if (prixCheckbox.checked) {
+      prixInputContainer.style.display = "block";
+    } else {
+      prixInputContainer.style.display = "none";
+    }
+  });
+
+	document.getElementById("copie").addEventListener("click", () => {
+	  copieInputContainer.style.display = 'block';
+	});
+	const copieCheckbox = document.getElementById("copie");
+  copieCheckbox.addEventListener("change", () => {
+    if (copieCheckbox.checked) {
+      copieInputContainer.style.display = "block";
+    } else {
+      copieInputContainer.style.display = "none";
+    }
+  });
 
 	envoyerBtn.addEventListener("click", () => {
 	  const image = modalImage.src;
@@ -479,7 +539,7 @@ function toggleMenu() {
 		proposition: proposition || "Demande de copie imprimée"
 	  };
   
-	  emailjs.send('TON_SERVICE_ID', 'TON_TEMPLATE_ID', templateParams)
+	  emailjs.send('service_9r7t0k9', 'TON_TEMPLATE_ID', templateParams)
 		.then(response => {
 		  alert("Message envoyé !");
 		  modal.style.display = "none";
