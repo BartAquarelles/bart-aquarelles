@@ -2915,6 +2915,7 @@ input, select, textarea {
 	#header {
 	background-image: url("images/image_accueil.jpg");
 	background-size: cover;
+	background-position: center top;
     background-attachment: fixed; /* Effet de défilement */
     height: 100vh; /* Prend toute la hauteur de l’écran */
     display: flex;
