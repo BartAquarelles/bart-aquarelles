@@ -3417,6 +3417,7 @@ input, select, textarea {
 
 			#header {
 				padding: 4em 3em 4em 3em ;
+				background-position: center top;
 			}
 
 				#header .actions {
@@ -3454,6 +3455,7 @@ input, select, textarea {
 
 			#header {
 				padding: 4em 2em 4em 2em ;
+				background-position: center top;
 			}
 
 				#header br {
@@ -3503,6 +3505,7 @@ input, select, textarea {
 
 			#header {
 				padding: 3em 1em 3em 1em ;
+				background-position: center top;
 			}
 
 		/* Footer */
