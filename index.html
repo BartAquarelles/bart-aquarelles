@@ -1,12 +1,8 @@
 <!DOCTYPE HTML>
-<!--
-	Photon by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
-		<title></title>
+		<title>Bart Aquarelles - L'art au service du beau</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -76,7 +72,7 @@
 			
 			<div class="gallery-item more">
                 <img src="assets/css/images/pont.jpg" alt="Aquarelle 4">
-                <p>Mélancolie</p>
+                <p>Et l'eau coule, encore, sous les ponts</p>
             </div>
             
 			<div class="gallery-item more">
@@ -293,15 +289,15 @@
 			<label for="prix">Je préfèrerais acquérir l'oeuvre originale</label>
 		</div>
 
-		<div id="prixInputContainer" style="display:none;" style="margin-bottom: 1.5em;">
+		<div id="prixInputContainer" style="margin-bottom: 1.5em;">
 			<p style="margin-top: -2em; margin-bottom: 0em;">Votre proposition :</p>
 			<input type="text" id="proposedPrice" placeholder="Veuillez entrer un montant" style="margin-bottom: 0.5em;">
-			<input type="text" id="name" placeholder="Nom" style="margin-bottom: 0.5em;">
-			<input type="text" id="email" placeholder="Adresse mail" style="margin-bottom: 0.5em;">
+			<input type="text" id="nameModalProposedPrice" placeholder="Nom" style="margin-bottom: 0.5em;">
+			<input type="text" id="emailModalProposedPrice" placeholder="Adresse mail" style="margin-bottom: 0.5em;">
 			  <button id="envoyerPrixInputContainer">Envoyer la requête</button>
 			</div>
   
-		<div id="copieInputContainer" style="display:none;" style="margin-bottom: 0em;">
+		<div id="copieInputContainer" style="margin-bottom: 0em;">
 			<!-- Affichage des prix -->
 			<i><p id="modalPriceCadre" style="margin-bottom: 0em;"></p></i>
 			<i><p id="modalPriceSansCadre" style="margin-bottom: 0.5em;"></p></i>
@@ -313,8 +309,8 @@
 				<input type="checkbox" id="selectPriceSansCadre" name="sanscadre" style="margin-bottom: 0.5em;">
 				<label for="selectPriceSansCadre">Choisir sans cadre</label>
 			</div>
-			<input type="text" id="name" placeholder="Nom" style="margin-bottom: 0.5em;">
-			<input type="text" id="email" placeholder="Adresse mail" style="margin-bottom: 1em;">
+			<input type="text" id="nameModalPrice" placeholder="Nom" style="margin-bottom: 0.5em;">
+			<input type="text" id="emailModalPrice" placeholder="Adresse mail" style="margin-bottom: 1em;">
 			<button id="envoyerCopieInputContainer">Envoyer la requête</button>
 
 		</div>
@@ -421,12 +417,12 @@ document.querySelector(".show-more").addEventListener("click", () => {
 
 function toggleMenu() {
     document.querySelector(".side-menu").classList.toggle("active");
-}
-
-function toggleMenu() {
-    document.querySelector(".side-menu").classList.toggle("active");
     document.body.classList.toggle("menu-open");
 }
+
+
+
+// formulaire de bas de page : envoi du mail ////////////////////////////////////////////////////////////////////////////
 			</script>
 <script type="text/javascript">
 	emailjs.init("lJjscvHd1X1-bfzAj");
@@ -466,7 +462,7 @@ function toggleMenu() {
 
 
 
-
+<!--Codage de la modale + mail ////////////////////////////////////////////////////////////////////////////////////: -->
 <script>
 	// Script concernant la modale 
 	const modal = document.getElementById("galleryModal");
@@ -531,16 +527,16 @@ function toggleMenu() {
 
 	envoyerPrixInputContainer.addEventListener("click", () => {
 	  const titre = "achat d'une oeuvre originale";
-		const image = modalImage.src;
+	  const image = modalImage.src;
 	  const description = modalText.textContent;
 	  const dimensions = modalDimensions.textContent;
 	  const disponibilite = modalDisponibilite.textContent;
 	  const proposition = document.getElementById("proposedPrice").value;
-	  var name = document.getElementById("name").value;
-	  var email = document.getElementById("email").value;
+	  var name = document.getElementById("nameModalProposedPrice").value;
+	  var email = document.getElementById("emailModalProposedPrice").value;
 	  const cadre = "Oui";
   
-	  const templateParams = {
+	  var templateParams = {
 		image: image,	
 		description: description,
 		dimensions: dimensions,
@@ -571,11 +567,11 @@ function toggleMenu() {
 	  const dimensions = modalDimensions.textContent;
 	  const disponibilite = modalDisponibilite.textContent;
 	  const proposition = "-pas de proposition-";
-	  var name = document.getElementById("name").value;
-	  var email = document.getElementById("email").value;
+	  var name = document.getElementById("nameModalPrice").value;
+	  var email = document.getElementById("emailModalPrice").value;
 	  var cadre = document.getElementById("selectPriceCadre").checked ? "Oui" : "Non";
   
-	  const templateParams = {
+	  var templateParams = {
 		image: image,	
 		description: description,
 		dimensions: dimensions,
