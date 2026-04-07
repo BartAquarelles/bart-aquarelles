@@ -3487,136 +3487,24 @@ input, select, textarea {
 
 	}
 
-/* XXSmall */
+/* =========================================
+   STYLES PERSONNALISÉS (OPTIMISÉS)
+   ========================================= */
 
-	@media screen and (max-width: 320px) {
-
-		/* Basic */
-
-			html, body {
-				min-width: 320px;
-			}
-
-		/* Main */
-
-			.main {
-				padding: 2em 1em 0.1em 1em ;
-			}
-
-		/* Header */
-
-			#header {
-				padding: 3em 1em 3em 1em ;
-				background-position: center top;
-				background-image: url("images/image_accueil_phone.jpg");
-			}
-
-		/* Footer */
-
-			#footer {
-				padding: 2em 1em 2em 1em ;
-			}
-
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-	#gallery {
-		text-align: center;
-		padding: 4em 0;
-	}
-	
-	.gallery-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 20px;
-		max-width: 1000px;
-		margin: 0 auto;
-	}
-	
-	.gallery-item {
-		background: #fff;
-		padding: 10px;
-		border-radius: 8px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	}
-	
-	.gallery-item img {
-		width: 100%;
-		height: auto;
-		border-radius: 8px;
-	}
-	
-	.gallery-item p {
-		margin-top: 10px;
-		font-weight: bold;
-	}
-
-	.gallery-item img:hover {
-		transform: scale(1.05);
-		transition: 0.3s ease-in-out;
-	}
-
-*/
-
-
-
-
-/* Galerie */
-.gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-}
-
-/* Items de la galerie */
-.gallery-items {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
-    gap: 20px;
-    max-width: 900px;
-    width: 100%;
-}
-
-
-/* Masquer les éléments supplémentaires au départ */
-.gallery-item.more {
-    display: none;  /* Caché au départ, ne prend pas de place */
-    opacity: 0; /* Transparence totale */
-    transform: translateY(20px); /* Décalage vers le bas */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-
-
+/* --- Galerie (Responsive & Fluide) --- */
 #gallery {
     text-align: center;
-    padding: 4em 0;
+    padding: 4em 1em; /* Un peu de padding latéral pour mobile */
 }
 
 .gallery-grid {
     display: grid;
+    /* La magie opère ici : les colonnes s'adaptent à l'écran automatiquement */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     max-width: 1000px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .gallery-item {
@@ -3624,124 +3512,97 @@ input, select, textarea {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
 .gallery-item img {
     width: 100%;
     height: auto;
     border-radius: 8px;
+    display: block;
 }
 
 .gallery-item p {
     margin-top: 10px;
     font-weight: bold;
-	font-family: 'Garamond', sans-serif;
+    font-family: 'Garamond', serif;
 }
 
-.gallery-item img:hover {
-    transform: scale(1.05);
-    transition: 0.3s ease-in-out;
+.gallery-item:hover {
+    transform: scale(1.03); /* L'effet survol est placé sur le conteneur, c'est plus propre */
 }
-	
 
-	ul.actions.special::after {
-		content: none !important;  /* Supprime le contenu généré par ::after */
-	}
+/* Éléments masqués par défaut */
+.gallery-item.more {
+    display: none; 
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
+/* Bouton Voir Plus */
+.show-more {
+    font-family: 'Garamond', serif;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: inset 0 0 0 1px rgba(144, 144, 144, 0.5);
+    color: #555 !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    height: 2.75em;
+    letter-spacing: 0.1em;
+    line-height: 2.75em;
+    padding: 0 2em;
+    text-transform: uppercase;
+    margin-top: 30px;
+    transition: background-color 0.2s ease-in-out;
+}
 
-	.show-more {
-		font-family:'Garamond', sans-serif;;
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		background-color: transparent;
-		border-radius: 4px;
-		border: 0;
-		box-shadow: inset 0 0 0 1px rgba(144, 144, 144, 0.5);
-		color: #555 !important;
-		cursor: pointer;
-		display: inline-block;
-		font-size: 0.9em;
-		font-weight: 400;
-		height: 2.75em;
-		letter-spacing: 0.1em;
-		line-height: 2.75em;
-		padding: 0 2em;
-		text-align: center;
-		text-decoration: none;
-		text-indent: 0.125em;
-		text-transform: uppercase;
-		white-space: nowrap;
-		margin-top: 30px
-	}
+.show-more:hover {
+    background-color: rgba(144, 144, 144, 0.075);
+}
 
-	
-	.show-more:hover {
-		background-color: rgba(144, 144, 144, 0.075);
-	}
+ul.actions.special::after {
+    content: none !important;
+}
 
-
-	
-/* Barre de séparation stylisée */
-.scroll-line {
-    position: relative;
-    top: 0%; /* Ajuste cette valeur pour la placer au bon endroit */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px; /* Débute comme un petit point */
-    height: 3px;
+/* --- Lignes décoratives (Flexibles) --- */
+/* Base commune pour éviter de répéter le code */
+.scroll-line, .scroll-line2, .scroll-line3, .modal-line {
     background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
     border-radius: 50px;
-    transition: width 0.3s ease-out, opacity 0.3s ease-out;
-    opacity: 1;
-}
-
-
-.scroll-line2 {
-    position: relative;
-    top: -50px; /* Ajuste cette valeur pour la placer au bon endroit */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1000px;
     height: 3px;
-    background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
-    border-radius: 50px;
+    margin: 1em auto; /* Remplace les positionnements absolus capricieux */
     transition: width 0.3s ease-out, opacity 0.3s ease-out;
-    opacity: 1;
 }
 
-.scroll-line3 {
-    position: relative;
-    top: -50px; /* Ajuste cette valeur pour la placer au bon endroit */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 3px;
-    background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
-    border-radius: 50px;
-    transition: width 0.3s ease-out, opacity 0.3s ease-out;
-    opacity: 1;
+.scroll-line { width: 10px; }
+.scroll-line2 { width: 10%; max-width: 1000px; } /* S'adapte à l'écran, limite à 1000px */
+.scroll-line3 { width: 10%; max-width: 300px; }
+.modal-line { width: 10em; margin-top: 0.5em; margin-bottom: 1.5em; }
+
+/* --- Formulaire --- */
+#form {
+    max-width: 800px; /* Largeur max au lieu de marges rigides */
+    margin: 0 auto;
+    width: 90%; /* Garde 5% de marge de chaque côté sur mobile */
 }
 
-
-/* ===== Bouton Menu ===== */
-
+/* --- Menu Latéral --- */
 .menu-button {
     position: fixed;
     top: 20px;
     right: 25px;
     width: 30px;
-    height: 30px;
+    height: 25px; /* Ajusté pour mieux espacer les traits */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
     z-index: 100;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .menu-button span {
@@ -3751,9 +3612,8 @@ input, select, textarea {
     background: rgb(74, 73, 73);
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
+    margin-left: auto; /* Aligne les points à droite */
 }
-
-/* Effet au survol : les points deviennent des traits */
 
 .menu-button:hover span {
     width: 30px;
@@ -3761,21 +3621,19 @@ input, select, textarea {
     border-radius: 2px;
 }
 
-/* Effet de défilement fluide */
-html {
-    scroll-behavior: smooth; /* Active le défilement fluide */
+.menu-open .menu-button {
+    opacity: 0;
+    visibility: hidden;
 }
-
-
-/* ===== Panneau Menu déroulant ===== */
 
 .side-menu {
     position: fixed;
     top: 0;
-    right: -250px; /* Caché par défaut */
+    right: -250px;
     width: 250px;
+    max-width: 80vw; /* Empêche le menu de prendre tout l'écran sur très petits mobiles */
     height: 100vh;
-    background: rgba(246, 244, 244, 0.9);
+    background: rgba(246, 244, 244, 0.95);
     box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
     transition: right 0.4s ease-in-out;
     z-index: 99;
@@ -3784,6 +3642,9 @@ html {
     justify-content: center;
 } 
 
+.side-menu.active {
+    right: 0;
+}
 
 .side-menu ul {
     list-style: none;
@@ -3791,10 +3652,7 @@ html {
     text-align: center;
 }
 
-.side-menu ul li {
-    margin: 20px 0;
-}
-
+.side-menu ul li { margin: 20px 0; }
 .side-menu ul li a {
     color: rgb(54, 54, 54);
     font-size: 18px;
@@ -3802,34 +3660,6 @@ html {
     transition: color 0.3s ease-in-out;
 }
 
-.side-menu ul li a:hover {
-    color: rgb(54, 54, 54);
-}
-
-/* Quand le menu est ouvert */
-.side-menu.active {
-    right: 0;
-}
-
-
-
-
-
-
-/* Animation pour masquer le bouton menu */
-.menu-button {
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-/* Cache le bouton menu lorsque le menu est ouvert */
-.menu-open .menu-button {
-    opacity: 0;
-    visibility: hidden;
-}
-
-
-
-/* ===== Bouton de fermeture (croix) ===== */
 .close-button {
     position: absolute;
     top: 15px;
@@ -3839,142 +3669,92 @@ html {
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
-
 .close-button:hover {
     transform: scale(1.2);
     color: rgb(138, 14, 14);
 }
 
-
-#form {
-    margin-left: 4em;
-    margin-right: 4em;
+/* --- Modale --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; 
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8); /* Un peu plus sombre pour faire ressortir l'image */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    font-family: 'Garamond', serif;
 }
 
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
 
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 2em;
+    width: 90%;
+    max-width: 800px; /* Empêche la modale d'être immense sur écran PC */
+    max-height: 90vh;
+    overflow-y: auto; /* Permet le scroll interne si le contenu est trop grand */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 10px;
+    animation: scaleUp 0.3s ease;
+}
 
-/* Appliquer une transition fluide à la modale */
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 1000;
-	left: 0; top: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(0,0,0,0.7);
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: opacity 0.4s ease;
-	font-family: 'Garamond', sans-serif;
-	
-  }
-  
-  /* Quand elle est active */
-  .modal.show {
-	display: flex;
-	opacity: 1;
-  }
-  
-  /* Contenu de la modale */
-  .modal-content {
-	position: relative; /* permet au bouton d'être positionné à l'intérieur */
-	background-color: white;
-	padding: 2em;
-	max-width: 90%;
-	max-height: 90%;
-	overflow: auto;
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
-	border-radius: 10px;
-	animation: scaleUp 0.3s ease;
-  }
-
-
-    /* ===== Bouton de fermeture (croix) ===== */
 .close-button-modal {
-	position: absolute;
+    position: absolute;
     top: 1em;
     right: 1em;
     font-size: 24px;
     color: rgb(123, 121, 121);
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    z-index: 10;
 }
-
 .close-button-modal:hover {
     transform: scale(1.2);
     color: rgb(138, 14, 14);
 }
-  
-  /* Image responsive - verticales ou horizontales */
-  #modalImage {
-	max-width: 100%;
-	max-height: 70vh;
-	object-fit: contain;
-	display: block;
-	margin: 0 auto;
-	border-radius: 0.5em;
-  }
-  
-  /* Petit effet d’apparition */
-  @keyframes scaleUp {
-	from {
-	  transform: scale(0.9);
-	  opacity: 0;
-	}
-	to {
-	  transform: scale(1);
-	  opacity: 1;
-	}
-  }
-  
-  /* Textes & layout */
-  .modal-description {
-	text-align: left;
-  }
-  
-  .actions {
-	display: flex;
-	gap: 1em;
-	flex-wrap: wrap;
-  }
-  
-  
-  .modal-line {
-    position: relative;
-    top: 20em; /* Ajuste cette valeur pour la placer au bon endroit */
-    left: 50%;
-    width: 10em; /* Débute comme un petit point */
-    height: 3px;
-    background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
-    border-radius: 50px;
-    opacity: 1;
+
+#modalImage {
+    max-width: 100%;
+    max-height: 50vh; /* Laisse de la place pour le texte en dessous */
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 0.5em;
 }
 
-
-
-#envoyerCopieInputContainer {
-	font-family: Garamond, sans serif;
-	letter-spacing: 0em;
+.modal-description { text-align: left; }
+.actions {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
 }
 
-#envoyerPrixInputContainer {
-	font-family: Garamond, sans serif;
-	letter-spacing: 0em;
+#prixInputContainer, #copieInputContainer {
+    display: none;
+    width: 100%;
+    margin-top: 1em;
 }
 
-#prixInputContainer {
-	display: none;
-	width: 100%;
-	clear: both;
-	margin-top: 1em;
-  }
+#envoyerCopieInputContainer, #envoyerPrixInputContainer {
+    font-family: 'Garamond', serif;
+}
 
-  #copieInputContainer {
-	display: none;
-	width: 100%;
-	clear: both;
-	margin-top: 1em;
-  }
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+html { scroll-behavior: smooth; }
