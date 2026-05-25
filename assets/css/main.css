@@ -3078,7 +3078,8 @@ input, select, textarea {
 			-webkit-transition: opacity 1s ease;
 			-ms-transition: opacity 1s ease;
 			transition: opacity 1s ease;
-			background-image: linear-gradient(45deg, #4fa49a, #4361c2);
+			background-color: #ffffff; /* On remplace par du blanc pur */
+			background-image: none;    /* On supprime le dégradé bleu */
 			content: '';
 			height: 100%;
 			left: 0;
@@ -3758,3 +3759,8 @@ ul.actions.special::after {
 }
 
 html { scroll-behavior: smooth; }
+
+/* Remplace le fond bleu de chargement par une couleur neutre */
+body, #header, .is-preload body {
+    background-color: #ffffff !important; /* Tu peux mettre #000000 pour du noir ou #f4f4f4 pour du gris */
+}
