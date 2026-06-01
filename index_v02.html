@@ -111,18 +111,9 @@
 				<div class="gallery-item more"><img src="assets/css/images/pin.jpg" alt="Aquarelle 18"><p>Mélancolie</p></div>
 			</div>
 			
-			<div id="gallery-controls" class="gallery-controls">
-                <button id="btn-show-more" class="show-more">Voir plus</button>
-                
-                <div id="floating-actions" class="floating-actions">
-                    <button id="btn-collapse" class="floating-btn" title="Replier la galerie">▲ Replier la galerie</button>
-                    <button id="btn-go-down" class="floating-btn" title="Aller à la suite">▼ Poursuivre la visite</button>
-                </div>
-            </div>
+			<button class="show-more">Voir plus</button>
 		</div>
 	</section>
-
-    
 
 	<!-- ================= SERVICES ================= -->
 	<section id="three" class="main style1 special">
@@ -212,84 +203,62 @@
 		</ul>
 	</section>
 
-	<!-- ================= MODALE ================= -->
+	<!-- ================= MODALE (Détails de l'œuvre) ================= -->
 	<div id="galleryModal" class="modal">
-    <div class="modal-content-art">
-        <div class="close-button-modal" onclick="toggleModal()">✖</div>
-        
-        <div class="modal-left">
-            <div class="frame">
-                <img id="modalImage" src="" alt="Détail de l'aquarelle">
-            </div>
-        </div>
-        
-        <div class="modal-right">
-            <header class="major">
-                <h2 id="modalTitre"></h2>
-            </header>
-            <div class="modal-line"></div>
-            
-            <div class="modal-description">
-                <p id="modalText"></p>
-                
-                <div class="specs">
-                    <span id="modalDimensions" class="modal-spec"></span>
-                    <span class="dot-separator">•</span>
-                    <span id="modalDisponibilite" class="modal-spec"></span>
-                </div>
-                
-                <div class="modal-note">
-                    <p><em>Toutes nos aquarelles sont livrées encadrées avec soin. Les œuvres originales sont accompagnées de leur certificat d'authenticité signé.</em></p>
-                </div>
-        
-                <div class="actions-row">
-                    <div class="custom-checkbox">
-                        <input type="checkbox" id="copie" name="copie">
-                        <label for="copie">Commander un tirage d'art</label>
-                    </div>
-                    <div class="custom-checkbox">
-                        <input type="checkbox" id="prix" name="prix">
-                        <label for="prix">Acquérir l'œuvre originale</label>
-                    </div>
-                </div>
+		<div class="modal-content">
+			<div class="close-button-modal" onclick="toggleModal()">✖</div>
+			
+			<header class="major"><h2 id="modalTitre" style="margin-bottom: 0em;"></h2></header>
+			<div class="modal-line"></div>
+			<p style="margin-top: -3em;">Description détaillée</p>
+			
+			<img id="modalImage" style="margin-top: -2em" src="" alt="">
+			
+			<div class="modal-description">
+				<p id="modalText" style="margin-bottom: 0em;"></p>
+				<p id="modalDimensions" style="margin-bottom: 0em;"></p>
+				<p id="modalDisponibilite" style="margin-bottom: 0em;"></p>
+				<p style="margin-bottom: 0.5em;">NB : Toutes les aquarelles sont livrées avec un cadre. Les oeuvres originales sont délivrées avec leur certificat d'authenticité.</p>
+		
+				<div class="actions">
+					<div class="col-6 col-12-small">
+						<input type="checkbox" id="copie" name="copie">
+						<label for="copie">Je souhaite me procurer une copie imprimée</label>
+					</div>
+					<div class="col-6 col-12-small">
+						<input type="checkbox" id="prix" name="prix">
+						<label for="prix">Je préfèrerais acquérir l'oeuvre originale</label>
+					</div>
 
-                <div id="prixInputContainer" class="form-container" style="display: none;">
-                    <h4>Votre proposition :</h4>
-                    <div class="input-group">
-                        <input type="text" id="proposedPrice" placeholder="Montant proposé (€)">
-                        <input type="text" id="nameModalProposedPrice" placeholder="Votre prénom et nom">
-                        <input type="email" id="emailModalProposedPrice" placeholder="Votre plus belle adresse mail">
-                        <button id="envoyerPrixInputContainer" class="primary button fit">Envoyer la requête</button>
-                    </div>
-                </div>
-        
-                <div id="copieInputContainer" class="form-container" style="display: none;">
-                    <div class="price-tags">
-                        <span id="modalPriceCadre"></span>
-                        <br>
-                        <span id="modalPriceSansCadre"></span>
-                    </div>
-                    
-                    <div class="input-group">
-                        <div class="checkbox-group inline">
-                            <div class="custom-checkbox">
-                                <input type="checkbox" id="selectPriceCadre" name="cadre">
-                                <label for="selectPriceCadre">Avec cadre</label>
-                            </div>
-                            <div class="custom-checkbox">
-                                <input type="checkbox" id="selectPriceSansCadre" name="sanscadre">
-                                <label for="selectPriceSansCadre">Sans cadre</label>
-                            </div>
-                        </div>
-                        <input type="text" id="nameModalPrice" placeholder="Votre prénom et nom">
-                        <input type="email" id="emailModalPrice" placeholder="Votre plus belle adresse mail">
-                        <button id="envoyerCopieInputContainer" class="primary button fit">Envoyer la requête</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+					<!-- Formulaire : Achat œuvre originale -->
+					<div id="prixInputContainer" style="margin-bottom: 1.5em; display: none;">
+						<p style="margin-top: -2em; margin-bottom: 0em;">Votre proposition :</p>
+						<input type="text" id="proposedPrice" placeholder="Veuillez entrer un montant" style="margin-bottom: 0.5em;">
+						<input type="text" id="nameModalProposedPrice" placeholder="Nom" style="margin-bottom: 0.5em;">
+						<input type="email" id="emailModalProposedPrice" placeholder="Adresse mail" style="margin-bottom: 0.5em;">
+						<button id="envoyerPrixInputContainer">Envoyer la requête</button>
+					</div>
+		
+					<!-- Formulaire : Achat copie -->
+					<div id="copieInputContainer" style="margin-bottom: 0em; display: none;">
+						<i><p id="modalPriceCadre" style="margin-bottom: 0em;"></p></i>
+						<i><p id="modalPriceSansCadre" style="margin-bottom: 0.5em;"></p></i>
+						<div class="col-6 col-12-small">
+							<input type="checkbox" id="selectPriceCadre" name="cadre" style="margin-bottom: 0.5em;">
+							<label for="selectPriceCadre">Choisir avec cadre</label>
+						</div>
+						<div class="col-6 col-12-small">
+							<input type="checkbox" id="selectPriceSansCadre" name="sanscadre" style="margin-bottom: 0.5em;">
+							<label for="selectPriceSansCadre">Choisir sans cadre</label>
+						</div>
+						<input type="text" id="nameModalPrice" placeholder="Nom" style="margin-bottom: 0.5em;">
+						<input type="email" id="emailModalPrice" placeholder="Adresse mail" style="margin-bottom: 1em;">
+						<button id="envoyerCopieInputContainer">Envoyer la requête</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- ================= SCRIPTS ================= -->
 	<!-- Bibliothèques externes -->
@@ -315,66 +284,21 @@
 		});
 
 		// Bouton "Voir plus" de la galerie
+		const showMoreButton = document.querySelector('.show-more');
+		const moreItems = document.querySelectorAll('.gallery-item.more');
 
-        // --- ANIMATION DYNAMIQUE DE LA GALERIE ---
-        const btnShowMore = document.getElementById('btn-show-more');
-        const floatingActions = document.getElementById('floating-actions');
-        const btnCollapse = document.getElementById('btn-collapse');
-        const btnGoDown = document.getElementById('btn-go-down');
-        const moreItems = document.querySelectorAll('.gallery-item.more');
-
-        // 1. Déployer la galerie (Le bouton glisse et se transforme)
-        btnShowMore.addEventListener('click', function() {
-            // Le bouton central s'efface et glisse vers la droite
-            btnShowMore.classList.add('morph-out');
-
-            // On attend un instant, on le cache, et on fait entrer les boutons latéraux
-            setTimeout(() => {
-                btnShowMore.style.display = 'none';
-                floatingActions.classList.add('morph-in');
-
-                // Apparition en cascade des nouvelles œuvres
-                moreItems.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.style.display = 'block'; 
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateY(0)';
-                        }, 50); 
-                    }, index * 150); 
-                });
-            }, 300); // 300ms de délai pour synchroniser les animations
-        });
-
-        // 2. Replier la galerie (Les boutons latéraux retournent au centre)
-        btnCollapse.addEventListener('click', function() {
-            // On cache les œuvres avec douceur
-            moreItems.forEach(item => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                setTimeout(() => { item.style.display = 'none'; }, 400);
-            });
-
-            // Les boutons latéraux sortent de l'écran
-            floatingActions.classList.remove('morph-in');
-            
-            // Le bouton central réapparaît et glisse vers le centre
-            setTimeout(() => {
-                btnShowMore.style.display = 'inline-block';
-                setTimeout(() => {
-                    btnShowMore.classList.remove('morph-out');
-                    
-                    // Remonte doucement l'écran en haut de la galerie
-                    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-                }, 50);
-            }, 300);
-        });
-
-        // 3. Poursuivre la visite (Scrolle vers la section suivante)
-        btnGoDown.addEventListener('click', function() {
-            // "#three" est l'ID de ta section "Que vous propose-t-on ?"
-            document.getElementById('three').scrollIntoView({ behavior: 'smooth' });
-        });
+		showMoreButton.addEventListener('click', function() {
+			moreItems.forEach((item, index) => {
+				setTimeout(() => {
+					item.style.display = 'block'; 
+					setTimeout(() => {
+						item.style.opacity = '1';
+						item.style.transform = 'translateY(0)';
+					}, 50); 
+				}, index * 200); 
+			});
+			setTimeout(() => { showMoreButton.style.display = 'none'; }, moreItems.length * 200);
+		});
 
 		// Lignes de progression au scroll
 		window.addEventListener("scroll", function () {
@@ -409,7 +333,7 @@
 		}
 
 		window.addEventListener("scroll", updateScrollLine2);
-		// document.querySelector(".show-more").addEventListener("click", () => setTimeout(updateScrollLine2, 500));
+		document.querySelector(".show-more").addEventListener("click", () => setTimeout(updateScrollLine2, 500));
 
 		// Gestion du menu latéral
 		function toggleMenu() {
