@@ -72,7 +72,6 @@
 				<div class="gallery-item">
 					<img src="assets/css/images/bateau.jpg" alt="Aquarelle 1" 
 						data-description="Un paysage aquarellé au bord de mer."
-						data-alt-images="assets/css/images/bateau_detail.jpg, assets/css/images/lacgele.jpg"
 						data-dimensions="20x30 cm"
 						data-dispo="Disponible"
 						data-titre="Horizons"
@@ -219,15 +218,9 @@
         <div class="close-button-modal" onclick="toggleModal()">✖</div>
         
         <div class="modal-left">
-            <div id="prevArt" class="nav-btn" title="Œuvre précédente">❮</div>
-            
             <div class="frame">
-                <div id="zoom-container">
-                    <img id="modalImage" src="" alt="Détail de l'aquarelle">
-                </div>
+                <img id="modalImage" src="" alt="Détail de l'aquarelle">
             </div>
-
-            <div id="nextArt" class="nav-btn" title="Œuvre suivante">❯</div>
         </div>
         
         <div class="modal-right">
@@ -321,209 +314,102 @@
 			el.innerHTML = text;
 		});
 
-		
-		// ==============================================================
-// 1. MAÇONNERIE (MASONRY) DE GAUCHE À DROITE
-// ==============================================================
-function layoutMasonry() {
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        // Si l'élément est visible, on calcule sa hauteur exacte
-        if(window.getComputedStyle(item).display !== 'none') {
-            item.style.gridRowEnd = 'auto'; // Reset
-            let height = item.offsetHeight;
-            // On lui assigne le nombre exact de "lignes" (10px) qu'il doit occuper + 30px d'espacement
-            item.style.gridRowEnd = `span ${Math.ceil((height + 30) / 10)}`;
-        }
-    });
-}
+		// Bouton "Voir plus" de la galerie
 
-// On lance le calcul quand la page et les images sont totalement chargées
-window.addEventListener('load', layoutMasonry);
-window.addEventListener('resize', layoutMasonry);
-// Double sécurité pour les images lentes
-Promise.all(Array.from(document.images).map(img => {
-    if (img.complete) return Promise.resolve(img.naturalHeight !== 0);
-    return new Promise(resolve => { img.onload = img.onerror = resolve; });
-})).then(() => layoutMasonry());
+        // --- ANIMATION DYNAMIQUE DE LA GALERIE ---
+        const btnShowMore = document.getElementById('btn-show-more');
+        const floatingActions = document.getElementById('floating-actions');
+        const btnCollapse = document.getElementById('btn-collapse');
+        const btnGoDown = document.getElementById('btn-go-down');
+        const moreItems = document.querySelectorAll('.gallery-item.more');
 
+        // 1. Déployer la galerie (Le bouton glisse et se transforme)
+        btnShowMore.addEventListener('click', function() {
+            // Le bouton central s'efface et glisse vers la droite
+            btnShowMore.classList.add('morph-out');
 
-// ==============================================================
-// 2. GESTION DU BOUTON "VOIR PLUS" & BOUTONS FLOTTANTS
-// ==============================================================
-const btnShowMore = document.getElementById('btn-show-more');
-const floatingActions = document.getElementById('floating-actions');
-const btnCollapse = document.getElementById('btn-collapse');
-const btnGoDown = document.getElementById('btn-go-down');
-const moreItems = document.querySelectorAll('.gallery-item.more');
-
-btnShowMore.addEventListener('click', function() {
-    btnShowMore.classList.add('morph-out');
-    setTimeout(() => {
-        btnShowMore.style.display = 'none';
-        floatingActions.classList.add('morph-in');
-
-        moreItems.forEach((item, index) => {
+            // On attend un instant, on le cache, et on fait entrer les boutons latéraux
             setTimeout(() => {
-                item.style.display = 'block'; 
-                layoutMasonry(); // Recalcule la grille à chaque nouvelle image
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 50); 
-            }, index * 150); 
+                btnShowMore.style.display = 'none';
+                floatingActions.classList.add('morph-in');
+
+                // Apparition en cascade des nouvelles œuvres
+                moreItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.display = 'block'; 
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 50); 
+                    }, index * 150); 
+                });
+            }, 300); // 300ms de délai pour synchroniser les animations
         });
-    }, 300);
-});
 
-btnCollapse.addEventListener('click', function() {
-    moreItems.forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px)';
-        setTimeout(() => { 
-            item.style.display = 'none'; 
-            layoutMasonry(); // Réajuste la grille
-        }, 400);
-    });
+        // 2. Replier la galerie (Les boutons latéraux retournent au centre)
+        btnCollapse.addEventListener('click', function() {
+            // On cache les œuvres avec douceur
+            moreItems.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                setTimeout(() => { item.style.display = 'none'; }, 400);
+            });
 
-    floatingActions.classList.remove('morph-in');
-    setTimeout(() => {
-        btnShowMore.style.display = 'inline-block';
-        setTimeout(() => {
-            btnShowMore.classList.remove('morph-out');
-            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-        }, 50);
-    }, 300);
-});
+            // Les boutons latéraux sortent de l'écran
+            floatingActions.classList.remove('morph-in');
+            
+            // Le bouton central réapparaît et glisse vers le centre
+            setTimeout(() => {
+                btnShowMore.style.display = 'inline-block';
+                setTimeout(() => {
+                    btnShowMore.classList.remove('morph-out');
+                    
+                    // Remonte doucement l'écran en haut de la galerie
+                    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+            }, 300);
+        });
 
-btnGoDown.addEventListener('click', () => document.getElementById('three').scrollIntoView({ behavior: 'smooth' }));
+        // 3. Poursuivre la visite (Scrolle vers la section suivante)
+        btnGoDown.addEventListener('click', function() {
+            // "#three" est l'ID de ta section "Que vous propose-t-on ?"
+            document.getElementById('three').scrollIntoView({ behavior: 'smooth' });
+        });
 
-// Masquer les boutons flottants en descendant
-window.addEventListener("scroll", function () {
-    if (floatingActions && floatingActions.classList.contains('morph-in')) {
-        let scrollBottom = window.scrollY + window.innerHeight;
-        let sectionThree = document.getElementById('three');
-        
-        // Si on dépasse le début de la section "Que vous propose-t-on ?"
-        if (scrollBottom > sectionThree.offsetTop + 150) {
-            floatingActions.style.opacity = '0';
-            floatingActions.style.pointerEvents = 'none';
-        } else {
-            floatingActions.style.opacity = '1';
-            floatingActions.style.pointerEvents = 'auto';
-        }
-    }
-});
-
-
-// ==============================================================
-// 3. GESTION DE LA MODALE (NAVIGATION, ZOOM & BOUTON RETOUR)
-// ==============================================================
-const modal = document.getElementById("galleryModal");
-const modalImage = document.getElementById("modalImage");
-const zoomContainer = document.getElementById("zoom-container");
-const prevBtn = document.getElementById("prevArt");
-const nextBtn = document.getElementById("nextArt");
-
-let currentAltImages = [];
-let currentAltIndex = 0;
-let isZoomed = false;
-
-// Ouvre la modale
-document.querySelectorAll('.gallery-item img').forEach((img) => {
-    img.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        modal.classList.add("show");
-        
-        // Push state pour le bouton retour du navigateur
-        history.pushState({ modalOpen: true }, "", "#oeuvre");
-
-        // Récupérer l'image cliquée et ses images alternatives
-        let baseSrc = img.src;
-        let altData = img.dataset.altImages;
-        currentAltImages = [baseSrc];
-        
-        if (altData) {
-            // Nettoie les espaces et crée le tableau d'images
-            currentAltImages = currentAltImages.concat(altData.split(',').map(s => s.trim()));
-            prevBtn.style.display = 'flex';
-            nextBtn.style.display = 'flex';
-        } else {
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-        }
-        
-        currentAltIndex = 0;
-        
-        // Chargement des données
-        document.getElementById("modalTitre").textContent = img.dataset.titre || "";
-        document.getElementById("modalPriceCadre").textContent = img.dataset.pricecadre || "";
-        document.getElementById("modalPriceSansCadre").textContent = img.dataset.pricesanscadre || "";
-        document.getElementById("modalText").textContent = img.dataset.description || "";
-        document.getElementById("modalDimensions").textContent = img.dataset.dimensions ? "Dimensions : " + img.dataset.dimensions : "";
-        document.getElementById("modalDisponibilite").textContent = img.dataset.dispo ? "Disponibilité : " + img.dataset.dispo : "";
-        
-        changeModalImage(0);
-    });
-});
-
-		// Navigation entre les images de l'œuvre
-		function changeModalImage(direction) {
-			currentAltIndex = (currentAltIndex + direction + currentAltImages.length) % currentAltImages.length;
-			modalImage.style.opacity = 0;
-			setTimeout(() => {
-				resetZoom();
-				modalImage.src = currentAltImages[currentAltIndex];
-				modalImage.style.opacity = 1;
-			}, 200);
-		}
-		prevBtn.addEventListener('click', (e) => { e.stopPropagation(); changeModalImage(-1); });
-		nextBtn.addEventListener('click', (e) => { e.stopPropagation(); changeModalImage(1); });
-
-		// Fermeture de la modale
-		function closeModal(updateHistory = true) {
-			modal.style.display = "none";
-			modal.classList.remove("show");
-			resetZoom();
+		// Lignes de progression au scroll
+		window.addEventListener("scroll", function () {
+			let scrollTop = window.scrollY;
 			
-			// Si fermé manuellement via la croix, on "rembobine" l'historique d'un cran
-			if (updateHistory) { history.back(); }
+			// Ligne 1
+			let scrollLine = document.querySelector(".scroll-line");
+			if (scrollLine) {
+				let triggerPoint = 20;
+				let maxScroll = 1500;
+				if (scrollTop > triggerPoint) {
+					let progress = Math.min((scrollTop - triggerPoint) / (maxScroll - triggerPoint), 1);
+					scrollLine.style.width = Math.max(10, progress * 100) + "%";
+				}
+				scrollLine.style.opacity = scrollTop > maxScroll ? "0" : "1";
+			}
+		});
+
+		function updateScrollLine2() {
+			let scrollLine2 = document.querySelector(".scroll-line2");
+			let gallerySection = document.querySelector("#gallery");
+			if (!scrollLine2 || !gallerySection) return;
+
+			let scrollTop2 = window.scrollY;
+			let maxScroll2 = gallerySection.offsetTop - window.innerHeight / 2;
+			let triggerPoint2 = document.body.scrollHeight - window.innerHeight;
+
+			if (scrollTop2 > maxScroll2) {
+				let progress = Math.min((scrollTop2 - maxScroll2) / (triggerPoint2 - maxScroll2), 1);
+				scrollLine2.style.width = Math.max(10, (1 - progress) * 100) + "%";
+			}
 		}
 
-		document.querySelector('.close-button-modal').addEventListener('click', () => closeModal(true));
-
-		// Fermeture avec le bouton "Retour" du téléphone/PC
-		window.addEventListener('popstate', (e) => {
-			if (modal.classList.contains('show')) {
-				closeModal(false); // false pour ne pas refaire un history.back()
-			}
-		});
-
-		// Zoom
-		function resetZoom() {
-			isZoomed = false;
-			modalImage.style.transform = "scale(1)";
-			zoomContainer.style.cursor = "zoom-in";
-		}
-
-		zoomContainer.addEventListener('click', function(e) {
-			if (!isZoomed) {
-				isZoomed = true;
-				modalImage.style.transform = "scale(2.5)";
-				zoomContainer.style.cursor = "zoom-out";
-				const rect = zoomContainer.getBoundingClientRect();
-				modalImage.style.transformOrigin = `${((e.clientX - rect.left) / rect.width) * 100}% ${((e.clientY - rect.top) / rect.height) * 100}%`;
-			} else {
-				resetZoom();
-			}
-		});
-
-		zoomContainer.addEventListener('mousemove', function(e) {
-			if (isZoomed) {
-				const rect = zoomContainer.getBoundingClientRect();
-				modalImage.style.transformOrigin = `${((e.clientX - rect.left) / rect.width) * 100}% ${((e.clientY - rect.top) / rect.height) * 100}%`;
-			}
-		});
-
+		window.addEventListener("scroll", updateScrollLine2);
+		// document.querySelector(".show-more").addEventListener("click", () => setTimeout(updateScrollLine2, 500));
 
 		// Gestion du menu latéral
 		function toggleMenu() {
@@ -552,6 +438,42 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
 					console.log(error);
 				});
 		});
+
+		// --- GESTION DE LA MODALE & ACHATS ---
+		const modal = document.getElementById("galleryModal");
+		const modalImage = document.getElementById("modalImage");
+		const prixInputContainer = document.getElementById("prixInputContainer");
+		const copieInputContainer = document.getElementById("copieInputContainer");
+		const prixCheckbox = document.getElementById("prix");
+		const copieCheckbox = document.getElementById("copie");
+
+		// Ouverture de la modale
+		document.querySelectorAll('.gallery-item img').forEach(img => {
+			img.addEventListener('click', () => {
+				modal.style.display = 'flex';
+				modal.classList.add("show");
+				
+				document.getElementById("modalTitre").textContent = img.dataset.titre || "";
+				document.getElementById("modalPriceCadre").textContent = img.dataset.pricecadre || "";
+				document.getElementById("modalPriceSansCadre").textContent = img.dataset.pricesanscadre || "";
+				modalImage.src = img.src;
+				document.getElementById("modalText").textContent = img.dataset.description || "";
+				document.getElementById("modalDimensions").textContent = img.dataset.dimensions ? "Dimensions : " + img.dataset.dimensions : "";
+				document.getElementById("modalDisponibilite").textContent = img.dataset.dispo ? "Disponibilité : " + img.dataset.dispo : "";
+				
+				// Réinitialisation des cases à cocher et conteneurs
+				prixCheckbox.checked = false;
+				copieCheckbox.checked = false;
+				prixInputContainer.style.display = 'none';
+				copieInputContainer.style.display = 'none';
+			});
+		});
+
+		// Fermeture de la modale
+		function toggleModal() {
+			modal.style.display = "none";
+			modal.classList.remove("show");
+		}
 
 		// Affichage dynamique des formulaires d'achat
 		prixCheckbox.addEventListener("change", () => prixInputContainer.style.display = prixCheckbox.checked ? "block" : "none");

@@ -3498,16 +3498,14 @@ input, select, textarea {
     padding: 4em 1em; /* Un peu de padding latéral pour mobile */
 }
 
-/* La Grille Masonry (Gauche à droite) */
 .gallery-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    grid-auto-rows: 10px; /* Lignes invisibles pour que le script ajuste la hauteur au millimètre */
-    gap: 0 25px; /* Espacement horizontal uniquement */
-    max-width: 1200px;
+    display: grid;
+    /* La magie opère ici : les colonnes s'adaptent à l'écran automatiquement */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
     margin: 0 auto;
     width: 100%;
-    align-items: start;
 }
 
 .gallery-item {
@@ -3860,144 +3858,46 @@ h1, h2, h3, h4, h5, h6, #header h1, #header p, .modal-right h2 {
     color: var(--encre-douce) !important;
 }
 
-/* --- 1. La Galerie (Mur d'Art "Masonry" & Effets) --- */
+/* --- 1. La Galerie (L'Esprit Aquarelle) --- */
 #gallery {
-    background-color: #f7f5f0 !important; 
+    background-color: #f7f5f0 !important; /* Un fond de section très légèrement teinté */
     padding-top: 5em;
 }
 
-/* La Grille Masonry dynamique */
-.gallery-grid {
-    display: block !important; /* Annule l'ancienne grille stricte */
-    column-count: 3; /* 3 colonnes par défaut */
-    column-gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
 .gallery-item {
-    display: inline-block; /* Crucial pour l'effet Masonry */
-    width: 100%;
-    margin-bottom: 25px; /* Espace vertical entre les œuvres */
-    break-inside: avoid; /* Empêche une image d'être coupée entre deux colonnes */
-    
-    background: transparent !important; /* Fini le carré blanc fixe */
-    padding: 0 !important; 
-    border-radius: 4px !important;
-    border: 7px solid #ffffff !important; /* Le cadre élégant qui moule l'image */
-    
-    position: relative;
-    overflow: hidden; /* Très important pour couper le flou Apple sur les bords */
-    
+    background: #ffffff !important;
+    padding: 20px !important;
+    border-radius: 2px !important;
+    /* Le secret est ici : un halo asymétrique qui mélange le bleu et l'or pour un effet pigment dispersé */
     box-shadow: -5px 10px 30px rgba(50, 90, 110, 0.06), 5px 10px 30px rgba(212, 175, 55, 0.04) !important;
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    cursor: pointer;
+    position: relative;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 1px solid rgba(0,0,0,0.03); /* Texture du bord du papier */
+    pointer-events: none;
 }
 
 .gallery-item img {
-    display: block;
-    width: 100%;
-    height: auto;
     border-radius: 0 !important;
-    transition: transform 0.8s ease !important; /* Zoom lent de l'image */
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.05) !important;
 }
 
-/* Le Titre en filigrane (Flou Apple) */
 .gallery-item p {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin: 0 !important;
-    padding: 15px 10px !important;
-    
-    /* L'effet Glassmorphism Apple */
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    
+    margin-top: 15px !important;
     font-family: 'Playfair Display', serif !important;
     font-size: 1.15em;
     font-style: italic;
     color: var(--encre-douce) !important;
-    text-align: center;
-    
-    opacity: 0; /* Totalement invisible par défaut */
-    transform: translateY(10px);
-    transition: all 0.4s ease !important;
 }
 
-/* Le Mouvement au survol (Holding) */
 .gallery-item:hover {
     transform: translateY(-8px) scale(1.02) !important; 
-    box-shadow: -10px 20px 40px rgba(50, 90, 110, 0.12), 10px 20px 40px rgba(212, 175, 55, 0.1) !important;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.06) !important; /* L'image s'agrandit doucement dans le cadre */
-}
-
-.gallery-item:hover p {
-    opacity: 1; /* Fait apparaître le filigrane */
-    transform: translateY(0);
-}
-
-/* Adaptabilité Mobile du Mur d'Art */
-@media screen and (max-width: 980px) {
-    .gallery-grid { column-count: 2; }
-}
-@media screen and (max-width: 600px) {
-    .gallery-grid { column-count: 1; }
-}
-
-/* --- Boutons Flottants : Forcer le Or sur "Replier" --- */
-#btn-collapse {
-    background-color: var(--or-champagne) !important;
-    color: white !important;
-    border-color: var(--or-champagne) !important;
-}
-#btn-collapse:hover {
-    background-color: #b8962e !important; /* Un peu plus sombre au survol */
-    transform: scale(1.05) translateY(-2px) !important;
-}
-
-/* --- Boutons Navigation Modale (Précédent / Suivant) --- */
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45px; height: 45px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(5px);
-    color: var(--or-champagne);
-    font-size: 20px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 100;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-.nav-btn:hover {
-    background: var(--or-champagne);
-    color: white;
-    transform: translateY(-50%) scale(1.1);
-}
-#prevArt { left: 2em; }
-#nextArt { right: 2em; }
-
-/* --- Gestion du Zoom Modale --- */
-#zoom-container {
-    overflow: hidden;
-    cursor: zoom-in; /* Icône de loupe par défaut */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#modalImage {
-    transition: transform 0.3s ease-out; /* Fluidité du zoom */
+    box-shadow: -10px 20px 40px rgba(50, 90, 110, 0.1), 10px 20px 40px rgba(212, 175, 55, 0.08) !important;
 }
 
 /* Lignes décoratives (Pinceau d'or) */
@@ -4326,24 +4226,4 @@ h1, h2, h3, h4, h5, h6, #header h1, #header p, .modal-right h2 {
     color: white !important;
     transform: scale(1.05) translateY(-2px) !important;
     box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3) !important;
-}
-
-
-/* =========================================
-   SCROLLBAR SUR-MESURE (THÈME GALERIE)
-   ========================================= */
-::-webkit-scrollbar {
-    width: 12px;
-}
-::-webkit-scrollbar-track {
-    background: var(--papier-aquarelle);
-    border-left: 1px solid rgba(0,0,0,0.05);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--or-champagne);
-    border-radius: 10px;
-    border: 3px solid var(--papier-aquarelle); /* Illusion d'une barre flottante */
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--bleu-paon);
 }
