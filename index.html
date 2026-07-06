@@ -360,12 +360,12 @@ btnShowMore.addEventListener('click', function() {
     btnShowMore.classList.add('morph-out');
     setTimeout(() => {
         btnShowMore.style.display = 'none';
-        floatingActions.classList.add('morph-in');
+        floatingActions.classList.add('morph-in'); // CSS fait apparaître les boutons
 
         moreItems.forEach((item, index) => {
             setTimeout(() => {
                 item.style.display = 'block'; 
-                layoutMasonry(); // Recalcule la grille à chaque nouvelle image
+                layoutMasonry(); 
                 setTimeout(() => {
                     item.style.opacity = '1';
                     item.style.transform = 'translateY(0)';
@@ -381,11 +381,15 @@ btnCollapse.addEventListener('click', function() {
         item.style.transform = 'translateY(20px)';
         setTimeout(() => { 
             item.style.display = 'none'; 
-            layoutMasonry(); // Réajuste la grille
+            layoutMasonry(); 
         }, 400);
     });
 
+    // 1. On enlève l'étiquette qui affiche les boutons
     floatingActions.classList.remove('morph-in');
+    // 2. SÉCURITÉ : On s'assure d'enlever l'étiquette de défilement pour remettre le code à zéro
+    floatingActions.classList.remove('hidden-by-scroll'); 
+
     setTimeout(() => {
         btnShowMore.style.display = 'inline-block';
         setTimeout(() => {
@@ -397,23 +401,23 @@ btnCollapse.addEventListener('click', function() {
 
 btnGoDown.addEventListener('click', () => document.getElementById('three').scrollIntoView({ behavior: 'smooth' }));
 
-// Masquer les boutons flottants en descendant
+// Masquer les boutons flottants en descendant (LA CORRECTION EST ICI)
 window.addEventListener("scroll", function () {
+    // Si la galerie est ouverte (présence de l'étiquette 'morph-in')
     if (floatingActions && floatingActions.classList.contains('morph-in')) {
         let scrollBottom = window.scrollY + window.innerHeight;
         let sectionThree = document.getElementById('three');
         
-        // Si on dépasse le début de la section "Que vous propose-t-on ?"
+        // Si on arrive sur la section du bas...
         if (scrollBottom > sectionThree.offsetTop + 150) {
-            floatingActions.style.opacity = '0';
-            floatingActions.style.pointerEvents = 'none';
+            // ... le JS donne l'étiquette d'invisibilité (le CSS fait le reste)
+            floatingActions.classList.add('hidden-by-scroll');
         } else {
-            floatingActions.style.opacity = '1';
-            floatingActions.style.pointerEvents = 'auto';
+            // ... sinon, le JS retire l'étiquette
+            floatingActions.classList.remove('hidden-by-scroll');
         }
     }
 });
-
 
 // ==============================================================
 // 3. GESTION DE LA MODALE (NAVIGATION, ZOOM & BOUTON RETOUR)
@@ -484,7 +488,13 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
 			modal.style.display = "none";
 			modal.classList.remove("show");
 			resetZoom();
-			
+
+			// NOUVEAU : On décoche les cases et on cache les formulaires à la fermeture
+			if(prixCheckbox) prixCheckbox.checked = false;
+			if(copieCheckbox) copieCheckbox.checked = false;
+			if(prixInputContainer) prixInputContainer.style.display = 'none';
+			if(copieInputContainer) copieInputContainer.style.display = 'none';
+					
 			// Si fermé manuellement via la croix, on "rembobine" l'historique d'un cran
 			if (updateHistory) { history.back(); }
 		}
@@ -616,6 +626,28 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
 				modalImage.classList.add('horizontal');
 			}
 		};
+
+// ==============================================================
+// 4. AFFICHAGE DYNAMIQUE DES FORMULAIRES D'ACHAT
+// ==============================================================
+
+// 1. Les présentations (On dit à l'ordinateur qui est qui)
+const prixInputContainer = document.getElementById("prixInputContainer");
+const copieInputContainer = document.getElementById("copieInputContainer");
+const prixCheckbox = document.getElementById("prix");
+const copieCheckbox = document.getElementById("copie");
+
+// 2. Le branchement électrique (Maintenant qu'il les connaît, il peut les écouter)
+prixCheckbox.addEventListener("change", function() {
+    prixInputContainer.style.display = prixCheckbox.checked ? "block" : "none";
+});
+
+copieCheckbox.addEventListener("change", function() {
+    copieInputContainer.style.display = copieCheckbox.checked ? "block" : "none";
+});
+
+
+
 	</script>
 </body>
 </html>

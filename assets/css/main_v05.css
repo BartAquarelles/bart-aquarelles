@@ -99,6 +99,7 @@ input, select, textarea {
 
 	body, input, select, textarea {
 		color: #666;
+		font-family: "Source Sans Pro", Garamond, sans-serif;
 		font-size: 16pt;
 		font-weight: 300;
 		line-height: 1.65em;
@@ -206,6 +207,7 @@ input, select, textarea {
 		background: rgba(144, 144, 144, 0.075);
 		border-radius: 4px;
 		border: solid 1px rgba(144, 144, 144, 0.5);
+		font-family: "Courier New", Garamond;
 		font-size: 0.9em;
 		margin: 0 0.25em;
 		padding: 0.25em 0.65em;
@@ -213,6 +215,7 @@ input, select, textarea {
 
 	pre {
 		-webkit-overflow-scrolling: touch;
+		font-family: "Courier New", Garamond;
 		font-size: 0.9em;
 		margin: 0 0 2em 0;
 	}
@@ -2152,21 +2155,12 @@ input, select, textarea {
 		opacity: 0;
 		width: 1em;
 		z-index: -1;
-
-			/* 1. On transforme le carré en boîte intelligente (Flexbox) */
-		display: inline-flex !important; 
-		
-		/* 2. On centre l'icône verticalement (de haut en bas) */
-		align-items: center !important; 
-		
-		/* 3. On centre l'icône horizontalement (de gauche à droite) */
-		justify-content: center !important;
 	}
 
 		input[type="checkbox"] + label,
 		input[type="radio"] + label {
 			text-decoration: none;
-			color: #b8962e;
+			color: #666;
 			cursor: pointer;
 			display: inline-block;
 			font-size: 1em;
@@ -2188,20 +2182,11 @@ input, select, textarea {
 				text-transform: none !important;
 				font-family: 'Garamond';
 				font-weight: 900;
-
-				/* 1. On transforme le carré en boîte intelligente (Flexbox) */
-				display: inline-flex !important; 
-				
-				/* 2. On centre l'icône verticalement (de haut en bas) */
-				align-items: center !important; 
-				
-				/* 3. On centre l'icône horizontalement (de gauche à droite) */
-				justify-content: center !important;
 			}
 
 			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
-				background: white;
+				background: rgba(144, 144, 144, 0.075);
 				border-radius: 4px;
 				border: solid 1px rgba(144, 144, 144, 0.5);
 				content: '';
@@ -2218,8 +2203,8 @@ input, select, textarea {
 
 		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
-			background: #b8962e;
-			border-color: #b8962e;
+			background: #666666;
+			border-color: #666666;
 			color: #ffffff;
 			content: '\f00c';
 		}
@@ -2295,6 +2280,7 @@ input, select, textarea {
 			text-rendering: auto;
 			line-height: 1;
 			text-transform: none !important;
+			font-family: 'Garamond';
 			font-weight: 400;
 		}
 
@@ -2308,6 +2294,10 @@ input, select, textarea {
 
 		.icon.solid:before {
 			font-weight: 900 !important;
+		}
+
+		.icon.brands:before {
+			font-family: 'Font Awesome 5 Brands';
 		}
 
 		.icon.style1:before {
@@ -2351,6 +2341,7 @@ input, select, textarea {
 				text-rendering: auto;
 				line-height: 1;
 				text-transform: none !important;
+				font-family: 'Font Awesome 5 Free';
 				font-weight: 400;
 			}
 
@@ -2933,10 +2924,6 @@ input, select, textarea {
     text-align: center;
     padding: 0;
 	}
-		/* Cache le trait vertical natif du template Photon */
-		#header .actions::after {
-			display: none !important;
-		}
 
 		#header a {
 			border-bottom-color: rgba(255, 255, 255, 0.5);
@@ -2945,6 +2932,12 @@ input, select, textarea {
 			#header a:hover {
 				color: #ffffff;
 			}
+
+		#header h1, #header h2, #header h3, #header h4, #header h5, #header h6, #header strong, #header b {
+			color: #3a3939;
+			text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);  /* Ombre douce */
+			font-family: 'Garamond', sans-serif;  /* Choisir une police par défaut */
+		}
 
 		#header header p {
 			color: #000000;
@@ -3496,106 +3489,50 @@ input, select, textarea {
 	}
 
 /* =========================================
-   DIRECTION ARTISTIQUE : LA GALERIE D'ART
+   STYLES PERSONNALISÉS (OPTIMISÉS)
    ========================================= */
 
-/* --- 0. Atmosphère, Polices et Couleurs --- */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
-
-:root {
-	--ma-police: 'Garamond', serif;
-    --papier-aquarelle: #fcfbf9;
-    --encre-douce: #3a3532;
-    --or-champagne: #d4af37;
-    --bleu-paon: #325a6e;
-    --ombre-chaude: rgba(58, 53, 50, 0.08);
-}
-
-html { scroll-behavior: smooth; }
-
-/* --- SCROLLBAR SUR-MESURE --- */
-::-webkit-scrollbar {
-    width: 12px;
-}
-::-webkit-scrollbar-track {
-    background: var(--papier-aquarelle);
-    border-left: 1px solid rgba(0,0,0,0.05);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--or-champagne);
-    border-radius: 10px;
-    border: 3px solid var(--papier-aquarelle);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--bleu-paon);
-}
-
-/* Remplacement du flash bleu */
-body, .is-preload body {
-    background-color: var(--papier-aquarelle) !important;
-    background-image: none !important;
-}
-
-/* On force l'image d'accueil à rester à sa place */
-#header {
-    background-image: url("images/image_accueil.jpg") !important;
-}
-
-/* On applique la même police à absolument tous les textes du site */
-body, h1, h2, h3, h4, h5, h6, p, a, div, input, #contact, button.primary, button, select, textarea, label, .side-menu, .floating-btn, #header h1, #header p, .modal-right h2, .specs, .show-more, .gallery-item p, #header h1, #header h2, #header h3, #header h4, #header h5, #header h6, #header strong, #header b, .icon.major, .icon.brands, .icon, pre, code       {
-    font-family: var(--ma-police) !important;
-	color: var(--encre-douce) !important;
-}
-
-/* FIX : On protège les cases à cocher pour qu'elles gardent leur police d'icônes ! */
-input[type="checkbox"] + label::before,
-input[type="radio"] + label::before {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    text-transform: none !important;
-    
-    font-family: 'Font Awesome 5 Free' !important; /* CORRECTION ICI */
-    font-weight: 900 !important; /* CORRECTION ICI */
-}
-
-/* --- 1. La Galerie (Mur d'Art "Masonry" Gauche à Droite) --- */
+/* --- Galerie (Responsive & Fluide) --- */
 #gallery {
-    background-color: #f7f5f0 !important; 
-    padding-top: 5em;
     text-align: center;
+    padding: 4em 1em; /* Un peu de padding latéral pour mobile */
 }
 
-/* La magie opère ici : grille dynamique de gauche à droite */
+/* La Grille Masonry (Gauche à droite) */
 .gallery-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    grid-auto-rows: 10px; /* Lignes invisibles pour ajustement par le Javascript */
+    grid-auto-rows: 10px; /* Lignes invisibles pour que le script ajuste la hauteur au millimètre */
     gap: 0 25px; /* Espacement horizontal uniquement */
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
     align-items: start;
-    text-align: left;
 }
 
 .gallery-item {
-    background: transparent !important;
-    padding: 0 !important;
-    border-radius: 4px !important;
-    border: 7px solid #ffffff !important; /* Cadre passe-partout */
-    
-    position: relative;
-    overflow: hidden; /* Coupe le flou Apple sur les bords */
-    
-    box-shadow: -5px 10px 30px rgba(50, 90, 110, 0.06), 5px 10px 30px rgba(212, 175, 55, 0.04) !important;
-    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
-    cursor: pointer;
-    height: max-content;
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.gallery-item p {
+    margin-top: 10px;
+    font-weight: bold;
+    font-family: 'Garamond', serif;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); /* L'effet survol est placé sur le conteneur, c'est plus propre */
 }
 
 /* Éléments masqués par défaut */
@@ -3606,13 +3543,364 @@ input[type="radio"] + label::before {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
+/* Bouton Voir Plus */
+.show-more {
+    font-family: 'Garamond', serif;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: inset 0 0 0 1px rgba(144, 144, 144, 0.5);
+    color: #555 !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    height: 2.75em;
+    letter-spacing: 0.1em;
+    line-height: 2.75em;
+    padding: 0 2em;
+    text-transform: uppercase;
+    margin-top: 30px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.show-more:hover {
+    background-color: rgba(144, 144, 144, 0.075);
+}
+
+ul.actions.special::after {
+    content: none !important;
+}
+
+/* --- Lignes décoratives (Flexibles) --- */
+/* Base commune pour éviter de répéter le code */
+.scroll-line, .scroll-line2, .scroll-line3, .modal-line {
+    background: linear-gradient(90deg, #0d0d0e, #d6d8d8);
+    border-radius: 50px;
+    height: 3px;
+    margin: 1em auto; /* Remplace les positionnements absolus capricieux */
+    transition: width 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.scroll-line { width: 10px; }
+.scroll-line2 { width: 10%; max-width: 1000px; } /* S'adapte à l'écran, limite à 1000px */
+.scroll-line3 { width: 10%; max-width: 300px; }
+.modal-line { width: 10em; margin-top: 0.5em; margin-bottom: 1.5em; }
+
+/* --- Formulaire --- */
+#form {
+    max-width: 800px; /* Largeur max au lieu de marges rigides */
+    margin: 0 auto;
+    width: 90%; /* Garde 5% de marge de chaque côté sur mobile */
+}
+
+/* --- Menu Latéral --- */
+.menu-button {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    width: 30px;
+    height: 25px; /* Ajusté pour mieux espacer les traits */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 100;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.menu-button span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: rgb(74, 73, 73);
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    margin-left: auto; /* Aligne les points à droite */
+}
+
+.menu-button:hover span {
+    width: 30px;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.menu-open .menu-button {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    max-width: 80vw; /* Empêche le menu de prendre tout l'écran sur très petits mobiles */
+    height: 100vh;
+    background: rgba(246, 244, 244, 0.95);
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.4s ease-in-out;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+.side-menu.active {
+    right: 0;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.side-menu ul li { margin: 20px 0; }
+.side-menu ul li a {
+    color: rgb(54, 54, 54);
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 24px;
+    color: rgb(123, 121, 121);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+.close-button:hover {
+    transform: scale(1.2);
+    color: rgb(138, 14, 14);
+}
+
+/* --- Modale --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; 
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8); /* Un peu plus sombre pour faire ressortir l'image */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    font-family: 'Garamond', serif;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 2em;
+    width: 90%;
+    max-width: 800px; /* Empêche la modale d'être immense sur écran PC */
+    max-height: 90vh;
+    overflow-y: auto; /* Permet le scroll interne si le contenu est trop grand */
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border-radius: 10px;
+    animation: scaleUp 0.3s ease;
+}
+
+.close-button-modal {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 24px;
+    color: rgb(123, 121, 121);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
+}
+.close-button-modal:hover {
+    transform: scale(1.2);
+    color: rgb(138, 14, 14);
+}
+
+#modalImage {
+    max-width: 100%;
+    max-height: 50vh; /* Laisse de la place pour le texte en dessous */
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 0.5em;
+}
+
+.modal-description { text-align: left; }
+.actions {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    font-family: Garamond;
+}
+
+#prixInputContainer, #copieInputContainer {
+    display: none;
+    width: 100%;
+    margin-top: 1em;
+}
+
+#envoyerCopieInputContainer, #envoyerPrixInputContainer {
+    font-family: 'Garamond', serif;
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+html { scroll-behavior: smooth; }
+
+/* Remplace le fond bleu de chargement par une couleur neutre */
+body, #header, .is-preload body {
+    background-color: #ffffff !important; /* Tu peux mettre #000000 pour du noir ou #f4f4f4 pour du gris */
+}
+
+/* =========================================
+   STYLES DE LA MODALE
+   ========================================= */
+
+/* Annule les marges excessives des titres dans la modale */
+.modal-content header.major h2 {
+    margin-bottom: 0;
+}
+
+.modal-content header.major {
+    margin-bottom: 0;
+}
+
+/* Structure fluide du contenu */
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2em; /* Crée un espace harmonieux entre l'image et le texte */
+}
+
+/* Style de la description */
+.modal-description h3 {
+    font-size: 1.25em;
+    margin-bottom: 0.5em;
+    font-family: Garamond;
+}
+
+.modal-description p {
+    margin-bottom: 0.5em; /* Unifie l'espacement des paragraphes */
+    font-family: Garamond;
+}
+
+.modal-spec {
+    font-weight: bold;
+    color: #555;
+}
+
+/* Mise en évidence de la note d'authenticité */
+.modal-note {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 1.5em;
+    border-left: 3px solid #6bd4c8; /* Rappel de la couleur accent du template */
+    padding-left: 1em;
+}
+
+/* Zone d'action (Checkboxes d'achat) */
+.actions-row {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    padding-top: 1.5em;
+    border-top: 1px solid rgba(144, 144, 144, 0.25); /* Ligne de séparation subtile */
+}
+
+/* Mise en valeur des prix */
+.price-tags p {
+    color: #4686a0; /* Couleur du thème Bart Aquarelles */
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Formulaires */
+.form-container h4 {
+    margin-bottom: 1em;
+}
+
+/* =========================================
+   DIRECTION ARTISTIQUE : LA GALERIE CHALEUREUSE
+   ========================================= */
+
+/* --- 0. Atmosphère, Polices et Couleurs --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
+
+:root {
+    --papier-aquarelle: #fcfbf9;
+    --encre-douce: #3a3532;
+    --or-champagne: #d4af37;
+    --bleu-paon: #325a6e;
+    --ombre-chaude: rgba(58, 53, 50, 0.08);
+}
+
+body, input, select, textarea, .side-menu, #contact, #form {
+    font-family: 'Montserrat', sans-serif !important;
+    background-color: var(--papier-aquarelle) !important;
+    color: var(--encre-douce) !important;
+}
+
+h1, h2, h3, h4, h5, h6, #header h1, #header p, .modal-right h2 {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--encre-douce) !important;
+}
+
+/* --- 1. La Galerie (Mur d'Art "Masonry" & Effets) --- */
+#gallery {
+    background-color: #f7f5f0 !important; 
+    padding-top: 5em;
+}
+
+/* La Grille Masonry dynamique */
+.gallery-grid {
+    display: block !important; /* Annule l'ancienne grille stricte */
+    column-count: 3; /* 3 colonnes par défaut */
+    column-gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.gallery-item {
+    display: inline-block; /* Crucial pour l'effet Masonry */
+    width: 100%;
+    margin-bottom: 25px; /* Espace vertical entre les œuvres */
+    break-inside: avoid; /* Empêche une image d'être coupée entre deux colonnes */
+    
+    background: transparent !important; /* Fini le carré blanc fixe */
+    padding: 0 !important; 
+    border-radius: 4px !important;
+    border: 7px solid #ffffff !important; /* Le cadre élégant qui moule l'image */
+    
+    position: relative;
+    overflow: hidden; /* Très important pour couper le flou Apple sur les bords */
+    
+    box-shadow: -5px 10px 30px rgba(50, 90, 110, 0.06), 5px 10px 30px rgba(212, 175, 55, 0.04) !important;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    cursor: pointer;
+}
+
 .gallery-item img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: 0 !important;
-    box-shadow: none !important;
-    transition: transform 0.8s ease !important; /* Zoom lent */
+    transition: transform 0.8s ease !important; /* Zoom lent de l'image */
 }
 
 /* Le Titre en filigrane (Flou Apple) */
@@ -3624,223 +3912,58 @@ input[type="radio"] + label::before {
     margin: 0 !important;
     padding: 15px 10px !important;
     
+    /* L'effet Glassmorphism Apple */
     background: rgba(255, 255, 255, 0.6) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     
+    font-family: 'Playfair Display', serif !important;
     font-size: 1.15em;
     font-style: italic;
     color: var(--encre-douce) !important;
     text-align: center;
     
-    opacity: 0; /* Invisible par défaut */
+    opacity: 0; /* Totalement invisible par défaut */
     transform: translateY(10px);
     transition: all 0.4s ease !important;
 }
 
+/* Le Mouvement au survol (Holding) */
 .gallery-item:hover {
     transform: translateY(-8px) scale(1.02) !important; 
     box-shadow: -10px 20px 40px rgba(50, 90, 110, 0.12), 10px 20px 40px rgba(212, 175, 55, 0.1) !important;
-    z-index: 10;
 }
 
 .gallery-item:hover img {
-    transform: scale(1.06) !important;
+    transform: scale(1.06) !important; /* L'image s'agrandit doucement dans le cadre */
 }
 
 .gallery-item:hover p {
-    opacity: 1; 
+    opacity: 1; /* Fait apparaître le filigrane */
     transform: translateY(0);
 }
 
+/* Adaptabilité Mobile du Mur d'Art */
 @media screen and (max-width: 980px) {
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .gallery-grid { column-count: 2; }
+}
+@media screen and (max-width: 600px) {
+    .gallery-grid { column-count: 1; }
 }
 
-/* Lignes décoratives */
-.scroll-line, .scroll-line2, .scroll-line3, .modal-line {
-    background: linear-gradient(90deg, transparent, var(--or-champagne), transparent) !important;
-    height: 2px !important;
-    border-radius: 0 !important;
-    margin: 1em auto;
-    transition: width 0.3s ease-out, opacity 0.3s ease-out;
-}
-.scroll-line { width: 10px; }
-.scroll-line2 { width: 10%; max-width: 1000px; }
-.scroll-line3 { width: 10%; max-width: 300px; }
-.modal-line { width: 10em; margin-top: 0.5em; margin-bottom: 1.5em; }
-
-/* --- 2. Boutons d'Action & Navigation --- */
-.show-more {
-    background-color: transparent !important;
-    color: var(--or-champagne) !important;
-    border: 1px solid var(--or-champagne) !important;
-    border-radius: 3px !important;
-    font-size: 1.2em !important;
-    padding: 0 2.5em !important;
-    height: 3em !important;
-    line-height: 3em !important;
-    text-transform: none !important;
-    cursor: pointer;
-    transition: all 0.4s ease !important;
-    margin-top: 30px;
-}
-
-.show-more:hover {
-    background-color: var(--or-champagne) !important;
-    color: white !important;
-    transform: translateY(-2px);
-}
-
-.show-more.morph-out {
-    opacity: 0 !important;
-    transform: translateX(50px) scale(0.8) !important;
-    pointer-events: none;
-}
-
-.gallery-controls {
-    text-align: center;
-    margin-top: 30px;
-    position: relative;
-    height: 60px;
-}
-
-.floating-actions {
-    position: fixed;
-    right: 20px;
-    bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateX(100px);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    pointer-events: none;
-}
-
-.floating-actions.morph-in {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-}
-
-.floating-btn {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(5px);
-    color: var(--or-champagne) !important;
-    border: 1px solid var(--or-champagne) !important;
-    border-radius: 30px !important;
-    text-transform: none !important; 
-    font-size: 1.1em !important;
-    letter-spacing: 0.05em !important;
-    height: auto !important; 
-    line-height: normal !important; 
-    padding: 10px 25px !important; 
-    display: inline-flex !important; 
-    align-items: center !important; 
-    justify-content: center !important; 
-    gap: 8px !important; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-    cursor: pointer;
-    transition: all 0.3s ease !important;
-}
-
-.floating-btn:hover {
-    background-color: var(--or-champagne) !important;
-    color: white !important;
-    transform: scale(1.05) translateY(-2px) !important;
-    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3) !important;
-}
-
-/* Le bouton Replier Forcé en Or (C'est ici que la magie opère pour ta demande) */
+/* --- Boutons Flottants : Forcer le Or sur "Replier" --- */
 #btn-collapse {
     background-color: var(--or-champagne) !important;
     color: white !important;
     border-color: var(--or-champagne) !important;
 }
 #btn-collapse:hover {
-    background-color: #b8962e !important;
+    background-color: #b8962e !important; /* Un peu plus sombre au survol */
+    transform: scale(1.05) translateY(-2px) !important;
 }
 
-button.primary, input[type="submit"].primary {
-    background-color: var(--bleu-paon) !important;
-    color: white !important;
-    text-transform: none !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.05em !important;
-    border-radius: 3px !important;
-    border: 1px solid var(--bleu-paon) !important;
-    transition: all 0.4s ease !important;
-}
-
-button.primary:hover, input[type="submit"].primary:hover {
-    background-color: #244252 !important;
-    border-color: #244252 !important;
-    transform: translateY(-2px);
-}
-
-/* --- 3. La Modale (Livre d'Art & Navigation) --- */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0; top: 0;
-    width: 100vw; height: 100vh;
-    background-color: rgba(40, 35, 32, 0.9) !important;
-    backdrop-filter: blur(10px);
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-.modal.show { display: flex; opacity: 1; }
-
-.modal-content-art {
-    display: flex;
-    flex-direction: row;
-    background: var(--papier-aquarelle);
-    width: 90vw;
-    max-width: 1200px;
-    height: 85vh;
-    border-radius: 2px;
-    overflow: hidden;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
-    position: relative;
-}
-
-.modal-left {
-    flex: 1.2;
-    background-color: #f0ebe4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3em;
-    position: relative;
-}
-
-.modal-left .frame {
-    background: white;
-    padding: 0.3em;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-}
-
-#zoom-container {
-    overflow: hidden;
-    cursor: zoom-in;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#modalImage {
-    max-width: 100%;
-    max-height: 65vh;
-    object-fit: contain;
-    transition: transform 0.3s ease-out;
-}
-
+/* --- Boutons Navigation Modale (Précédent / Suivant) --- */
 .nav-btn {
     position: absolute;
     top: 50%;
@@ -3865,10 +3988,71 @@ button.primary:hover, input[type="submit"].primary:hover {
 #prevArt { left: 2em; }
 #nextArt { right: 2em; }
 
+/* --- Gestion du Zoom Modale --- */
+#zoom-container {
+    overflow: hidden;
+    cursor: zoom-in; /* Icône de loupe par défaut */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#modalImage {
+    transition: transform 0.3s ease-out; /* Fluidité du zoom */
+}
+
+/* Lignes décoratives (Pinceau d'or) */
+.scroll-line, .scroll-line2, .scroll-line3, .modal-line {
+    background: linear-gradient(90deg, transparent, var(--or-champagne), transparent) !important;
+    height: 1px !important;
+    border-radius: 0 !important;
+}
+
+/* --- 2. La Modale (Le Livre d'Art) --- */
+.modal {
+    background-color: rgba(40, 35, 32, 0.9) !important; /* Gris chaud très sombre, presque sépia */
+    backdrop-filter: blur(10px);
+}
+
+.modal-content-art {
+    display: flex;
+    flex-direction: row; /* Met l'image à gauche et le texte à droite */
+    background: var(--papier-aquarelle);
+    width: 90vw;
+    max-width: 1200px;
+    height: 85vh; /* Hauteur fixe pour un bel effet livre */
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+    animation: fadeInArt 0.6s ease;
+    position: relative;
+}
+
+.modal-left {
+    flex: 1.2;
+    background-color: #f0ebe4; /* Fond un peu plus sombre pour faire ressortir l'aquarelle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3em;
+    position: relative;
+}
+
+.modal-left .frame {
+    background: white;
+    padding: 2em;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+#modalImage {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+}
+
 .modal-right {
     flex: 1;
     padding: 4em 4em;
-    overflow-y: auto;
+    overflow-y: auto; /* Permet de scroller uniquement la partie texte si besoin */
     display: flex;
     flex-direction: column;
 }
@@ -3896,15 +4080,23 @@ button.primary:hover, input[type="submit"].primary:hover {
 
 .specs {
     margin-bottom: 2em;
-    font-size: 1.1em;
-    color: var(--encre-douce);
+    font-size: 1em; /* Taille plus naturelle */
+    color: var(--encre-douce); /* On reprend la couleur du texte global */
+    font-family: 'Garamond', serif !important; /* Retour à l'élégance du Garamond */
+    
+    /* Les lignes "text-transform: uppercase" et "letter-spacing" ont été supprimées ici */
 }
 
 .dot-separator {
     margin: 0 10px;
     color: var(--or-champagne);
-    font-size: 1.5em;
+    font-size: 1.5em; /* Un point légèrement plus gros pour une belle séparation */
     vertical-align: middle;
+}
+
+.dot-separator {
+    margin: 0 10px;
+    color: var(--or-champagne);
 }
 
 .modal-note {
@@ -3916,76 +4108,242 @@ button.primary:hover, input[type="submit"].primary:hover {
     line-height: 1.6;
 }
 
-/* --- Menu Latéral --- */
-.menu-button {
-    position: fixed;
-    top: 20px; right: 25px;
-    width: 30px; height: 25px;
-    display: flex; flex-direction: column; justify-content: space-between;
-    cursor: pointer; z-index: 100;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+/* --- 3. Les Formulaires de Contact & d'Achat (Design Éditorial) --- */
+#contact {
+    background-color: transparent !important;
 }
-.menu-button span {
-    display: block; width: 6px; height: 6px;
-    background: rgb(74, 73, 73); border-radius: 50%;
-    transition: all 0.3s ease-in-out; margin-left: auto;
-}
-.menu-button:hover span { width: 30px; height: 4px; border-radius: 2px; }
-.menu-open .menu-button { opacity: 0; visibility: hidden; }
 
-.side-menu {
-    position: fixed; top: 0; right: -250px;
-    width: 250px; max-width: 80vw; height: 100vh;
-    background: rgba(250, 249, 246, 0.85) !important;
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    border-left: 1px solid rgba(197, 160, 89, 0.3);
-    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
-    transition: right 0.4s ease-in-out; z-index: 99;
-    display: flex; align-items: center; justify-content: center;
-} 
-.side-menu.active { right: 0; }
-.side-menu ul { list-style: none; padding: 0; text-align: center; }
-.side-menu ul li { margin: 20px 0; }
-.side-menu ul li a { color: rgb(54, 54, 54); font-size: 18px; text-decoration: none; transition: color 0.3s ease-in-out; }
-.side-menu ul li a:hover { color: var(--or-champagne); }
-.close-button { position: absolute; top: 15px; right: 25px; font-size: 24px; color: rgb(123, 121, 121); cursor: pointer; transition: transform 0.3s ease-in-out; }
-.close-button:hover { transform: scale(1.2); color: var(--or-champagne); }
-
-/* Formulaires de base */
-#form { max-width: 800px; margin: 0 auto; width: 90%; }
 #form form, .form-container {
-    background: white; padding: 3em; border-radius: 2px;
-    box-shadow: 0 15px 35px var(--ombre-chaude); margin-top: 2em;
+    background: white;
+    padding: 3em;
+    border-radius: 2px;
+    box-shadow: 0 15px 35px var(--ombre-chaude);
+    margin-top: 2em;
 }
+
 input[type="text"], input[type="email"], select, textarea {
     background-color: transparent !important;
-    border: none !important; border-bottom: 1px solid #ddd !important;
-    border-radius: 0 !important; padding-left: 0 !important;
-    transition: border-color 0.3s ease !important; margin-bottom: 1.5em;
-}
-input:focus, textarea:focus, select:focus {
-    border-bottom: 2px solid var(--bleu-paon) !important; box-shadow: none !important;
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease !important;
+    margin-bottom: 1.5em;
 }
 
-/* Mobile Adaptations */
-@media screen and (max-width: 980px) {
-    .modal-content-art { flex-direction: column; height: 95vh; overflow-y: auto; }
-    .modal-left { padding: 1.5em; }
-    .modal-right { padding: 2em; }
+input:focus, textarea:focus, select:focus {
+    border-bottom: 2px solid var(--bleu-paon) !important;
+    box-shadow: none !important;
 }
-@media screen and (max-width: 736px) {
-    #contact { padding-bottom: 0 !important; }
-    #form form, .form-container { padding: 1.5em 1em !important; margin-top: 1em !important; width: 100% !important; }
-    button.primary, input[type="submit"].primary, .show-more {
-        padding: 0 1em !important; font-size: 0.85em !important; width: 100% !important; 
-        white-space: normal !important; height: auto !important; min-height: 3.5em;
+
+/* Boutons Principaux (Envoyer le message, Envoyer la requête) */
+button.primary, input[type="submit"].primary, .button.primary {
+    background-color: var(--bleu-paon) !important;
+    color: white !important;
+    font-family: 'Garamond', sans-serif !important;
+    text-transform: none !important; /* Fini le texte agressif en majuscules */
+    font-weight: 400 !important; /* Typographie plus fine et élégante */
+    letter-spacing: 0.05em !important; /* Espacement naturel */
+    font-size: 1em !important;
+    padding: 0 2.5em !important;
+    height: 3em !important;
+    line-height: 3em !important;
+    border-radius: 3px !important; /* Très léger arrondi pour la douceur */
+    border: 1px solid var(--bleu-paon) !important;
+    box-shadow: 0 8px 20px rgba(50, 90, 110, 0.15) !important; /* Ombre vaporeuse */
+    transition: all 0.4s ease !important;
+}
+
+button.primary:hover, input[type="submit"].primary:hover, .button.primary:hover {
+    background-color: #244252 !important; /* Teinte légèrement plus profonde au survol */
+    border-color: #244252 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(50, 90, 110, 0.25) !important;
+}
+
+/* Boutons Secondaires (Voir plus, Tout effacer) - Style "Fantôme" très délicat */
+.show-more, input[type="reset"] {
+    background-color: transparent !important;
+    color: var(--encre-douce) !important;
+    font-family: 'Garamond', sans-serif !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.05em !important;
+    font-size: 1em !important;
+    padding: 0 2.5em !important;
+    height: 3em !important;
+    line-height: 3em !important;
+    border-radius: 3px !important;
+    border: 1px solid rgba(58, 53, 50, 0.2) !important; /* Liseré très discret */
+    box-shadow: none !important;
+    transition: all 0.4s ease !important;
+}
+
+.show-more:hover, input[type="reset"]:hover {
+    background-color: rgba(58, 53, 50, 0.03) !important; /* Léger fond grisé au survol */
+    border-color: var(--encre-douce) !important;
+    transform: translateY(-2px);
+}
+
+
+/* Checkboxes personnalisées */
+.custom-checkbox {
+    margin-bottom: 1em;
+}
+.custom-checkbox input[type="checkbox"] + label::before {
+    border-radius: 0 !important;
+    border: 1px solid #ccc;
+}
+.custom-checkbox input[type="checkbox"]:checked + label::before {
+    background: var(--or-champagne) !important;
+    border-color: var(--or-champagne) !important;
+}
+
+@keyframes fadeInArt {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive pour la modale sur mobile */
+@media screen and (max-width: 980px) {
+    .modal-content-art {
+        flex-direction: column;
+        height: 95vh;
+        overflow-y: auto;
+    }
+    .modal-left {
+        padding: 1.5em;
+    }
+    .modal-right {
+        padding: 2em;
     }
 }
 
 
-/* Nouvelle classe d'invisibilité gérée par le JavaScript */
-.hidden-by-scroll {
+/* --- 0. Importation des polices (Remplacement) --- */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
+
+/* --- 1. Retour de la police Garamond partout --- */
+body, input, select, textarea, p, .gallery-item p {
+    font-family: 'Garamond', serif !important;
+    font-size: 1.1em;
+}
+
+h1, h2, h3, h4, h5, h6, #header h1, #header p, .modal-right h2 {
+    font-family: 'Garamond', serif !important;
+    letter-spacing: 0.05em;
+}
+
+/* On garde juste le Montserrat (très lisible) pour les petites infos des menus et formulaires */
+.side-menu, #contact, .specs, label {
+    font-family: Garamond, sans-serif !important;
+}
+
+/* --- 2. Le bouton "Voir plus" Doré (Restauration) --- */
+.show-more {
+    font-family: 'Garamond', serif !important;
+    background-color: transparent !important;
+    color: var(--or-champagne) !important;
+    border: 1px solid var(--or-champagne) !important;
+    box-shadow: none !important;
+    font-size: 1.2em !important;
+    transition: all 0.4s ease !important;
+}
+
+.show-more:hover {
+    background-color: var(--or-champagne) !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* Effet de disparition pour la transition */
+.show-more.morph-out {
     opacity: 0 !important;
-    transform: translateX(100px) !important; /* Repousse les boutons hors de l'écran */
-    pointer-events: none !important; /* Empêche de cliquer dans le vide */
+    transform: translateX(50px) scale(0.8) !important;
+    pointer-events: none;
+}
+
+/* --- 3. Les Boutons Flottants Latéraux (Nouveau) --- */
+.gallery-controls {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    height: 60px; /* Maintient l'espace quand le bouton disparaît */
+}
+
+.floating-actions {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(100px); /* Caché hors de l'écran à droite */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Effet de rebond élastique */
+    pointer-events: none;
+}
+
+/* L'état "Actif" qui fait glisser les boutons dans l'écran */
+.floating-actions.morph-in {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.floating-btn {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(5px);
+    color: var(--or-champagne) !important;
+    border: 1px solid var(--or-champagne) !important;
+    border-radius: 30px !important;
+    
+    /* 1. Finies les majuscules forcées */
+    text-transform: none !important; 
+    font-family: 'Garamond', serif !important; /* On applique aussi le Garamond ici pour l'élégance */
+    font-size: 1.1em !important;
+    
+    /* 2. Centrage vertical parfait (Flexbox) */
+    height: auto !important; /* Annule la hauteur forcée de l'ancien template */
+    line-height: normal !important; /* Annule le décalage vers le bas */
+    padding: 10px 25px !important; /* Espace équilibré en haut/bas et gauche/droite */
+    display: inline-flex !important; /* Active le centrage intelligent */
+    align-items: center !important; /* Centre parfaitement à la verticale */
+    justify-content: center !important; /* Centre à l'horizontale */
+    gap: 8px !important; /* Ajoute un tout petit espace entre la flèche et le texte */
+    
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer;
+    transition: all 0.3s ease !important;
+    letter-spacing: 0em;
+}
+
+.floating-btn:hover {
+    background-color: var(--or-champagne) !important;
+    color: white !important;
+    transform: scale(1.05) translateY(-2px) !important;
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3) !important;
+}
+
+
+/* =========================================
+   SCROLLBAR SUR-MESURE (THÈME GALERIE)
+   ========================================= */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: var(--papier-aquarelle);
+    border-left: 1px solid rgba(0,0,0,0.05);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--or-champagne);
+    border-radius: 10px;
+    border: 3px solid var(--papier-aquarelle); /* Illusion d'une barre flottante */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bleu-paon);
 }
