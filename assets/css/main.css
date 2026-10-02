@@ -2722,7 +2722,7 @@ input, select, textarea {
 		text-align: center;
 		text-decoration: none;
 		text-indent: 0.125em;
-		text-transform: uppercase;
+		/* text-transform: uppercase; */
 		white-space: nowrap;
 	}
 
@@ -2763,7 +2763,7 @@ input, select, textarea {
 		input[type="button"].small,
 		button.small,
 		.button.small {
-			font-size: 0.7em;
+			font-size: 1.15em;
 		}
 
 		input[type="submit"].large,
@@ -2771,7 +2771,7 @@ input, select, textarea {
 		input[type="button"].large,
 		button.large,
 		.button.large {
-			font-size: 1.25em;
+			font-size: 1.15em;
 		}
 
 		input[type="submit"].wide,
@@ -3717,7 +3717,7 @@ input[type="checkbox"] + label::before, input[type="radio"] + label::before {
     flex: 1 !important; /* Prend 33% de la place */
     padding: 4rem 3rem !important;
     background: #ffffff !important;
-    overflow-y: auto; display: flex; flex-direction: column; justify-content: center;
+    overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start !important;
 }
 
 /* Le titre réapparaît ! */
@@ -3883,3 +3883,106 @@ input[type="radio"] + label::before,
 .fas, .fab {
     font-family: 'Garamond' !important;
 }	
+
+/* =========================================
+   LE DESIGN DES CASES À COCHER
+   ========================================= */
+
+/* 1. On sécurise l'affichage de l'icône (Adieu le Tofu !) */
+input[type="checkbox"] + label::before, 
+input[type="radio"] + label::before {
+    font-family: 'Font Awesome 5 Free' !important;
+    font-weight: 900 !important; /* Crucial : 900 débloque les icônes "solides" */
+}
+
+/* 2. Le design de la case QUAND ELLE EST COCHÉE */
+input[type="checkbox"]:checked + label::before {
+    /* Le fond du carré */
+    background-color: var(--bleu-marine) !important; 
+    
+    /* La bordure du carré */
+    border-color: var(--bleu-marine) !important; 
+    
+    /* La couleur de l'icône à l'intérieur */
+    color: #ffffff !important; 
+    
+    /* L'icône affichée (ici, la fameuse coche) */
+    content: '\f00c' !important; 
+}
+
+
+/* =========================================
+   CONTRÔLE DES ESPACEMENTS : LA MODALE
+   ========================================= */
+
+/* 1. Le grand Titre de l'œuvre */
+.modal-right header.major h2 {
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important; /* Espace entre le titre et la ligne bleue */
+}
+
+/* 2. La ligne bleue décorative */
+.modal-line {
+    margin-top: 0rem !important;
+    margin-bottom: 2rem !important; /* Espace entre la ligne et le texte descriptif */
+}
+
+/* 3. Le texte de description (l'histoire de l'aquarelle) */
+.modal-description p {
+    margin-top: -2rem !important;
+    margin-bottom: 1.5rem !important; /* Espace sous le texte */
+}
+
+/* 4. La ligne "Dimensions • Disponibilité" */
+.specs {
+    margin-top: 0 !important;
+    margin-bottom: 2.5rem !important; /* Grand espace pour détacher cette info technique */
+}
+
+/* 5. La petite note d'authenticité (le bloc avec le liseré bleu) */
+.modal-note {
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important; /* Espace avant d'arriver aux cases à cocher */
+}
+
+/* 6. Les cases à cocher (Tirage d'art / Œuvre originale) */
+.custom-checkbox {
+    margin-top: 0 !important;
+    margin-bottom: 0rem !important; /* Espace entre chaque case */
+}
+
+
+
+/* =========================================
+   CONTRÔLE DES TAILLES DE POLICE : LA MODALE
+   ========================================= */
+
+/* 1. Le grand Titre de l'œuvre */
+.modal-right header.major h2 {
+    font-size: 2.5rem !important; /* Très grand, pour dominer la page */
+}
+
+/* 2. Le texte de description (l'histoire de l'aquarelle) */
+.modal-description p {
+    font-size: 1.5rem !important; /* Légèrement plus grand qu'un texte normal pour un confort de lecture type "Livre" */
+}
+
+/* 3. La ligne "Dimensions • Disponibilité" */
+.specs {
+    font-size: 1.15rem !important; /* Taille standard, un peu plus petite que la description */
+}
+
+/* 4. Le point de séparation (•) entre dimensions et disponibilité */
+.dot-separator {
+    font-size: 1.15rem !important; /* Un peu plus gros pour faire un bel élément graphique */
+}
+
+/* 5. La petite note d'authenticité (le bloc avec le liseré bleu) */
+.modal-note, .modal-note p {
+    font-size: 1.15rem !important; /* Plus petit pour faire "mention légale" discrète */
+}
+
+/* 6. Le texte des cases à cocher */
+input[type="checkbox"] + label {
+    font-size: 1.15rem !important; /* Bien lisible pour inciter à l'action */
+}

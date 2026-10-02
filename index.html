@@ -464,7 +464,7 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
         document.getElementById("modalPriceSansCadre").textContent = img.dataset.pricesanscadre || "";
         document.getElementById("modalText").textContent = img.dataset.description || "";
         document.getElementById("modalDimensions").textContent = img.dataset.dimensions ? "Dimensions : " + img.dataset.dimensions : "";
-        document.getElementById("modalDisponibilite").textContent = img.dataset.dispo ? "Disponibilité : " + img.dataset.dispo : "";
+        document.getElementById("modalDisponibilite").textContent = img.dataset.dispo ? "" + img.dataset.dispo : "";
         
         changeModalImage(0);
     });
