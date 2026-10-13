@@ -72,27 +72,32 @@
 				<div class="gallery-item">
 					<img src="assets/css/images/bateau.jpg" alt="Aquarelle 1" 
 						data-description="Un paysage aquarellé au bord de mer."
-						data-alt-images="assets/css/images/bateau_detail.jpg, assets/css/images/lacgele.jpg"
-						data-dimensions="20x30 cm"
+						data-alt-images=""
+						data-dimensions="20x30cm"
 						data-dispo="Disponible"
 						data-titre="Horizons"
-						data-pricesanscadre="Copie aux dimensions originales sans cadre : 15€"
-						data-pricecadre="Copie aux dimensions originales avec cadre : 25€">
+						data-price="24.99€">
 					<p>Horizons</p>
 				</div>
+
 				<div class="gallery-item">
 					<img src="assets/css/images/image_accueil.jpg" alt="Aquarelle 2"
-						data-description=""
-						data-dimensions="20x30 cm"
+						data-description="Voyage au pays du soleil levant."
+						data-dimensions="20x30cm"
 						data-dispo="Disponible"
 						data-titre="Embruns d'Asie"
-						data-pricesanscadre="Copie aux dimensions originales sans cadre : 15€"
-						data-pricecadre="Copie aux dimensions originales avec cadre : 25€">
+						data-price="39.99€">
 					<p>Embruns d'Asie</p>
 				</div>
 
-				<!-- Autres œuvres -->
-				<div class="gallery-item"><img src="assets/css/images/eglise_4.jpg" alt="Aquarelle 3"><p>Flocons et quiétude</p></div>
+				<div class="gallery-item"><img src="assets/css/images/eglise.jpg" alt="Aquarelle 3"
+						data-description="Une église enneigée en hiver."
+						data-alt-images=""
+						data-dimensions="20x30cm"
+						data-dispo="Disponible"
+						data-titre="Flocons et quiétude"
+						data-price="24.99€">
+						<p>Flocons et quiétude</p></div>
 				
 				<!-- Œuvres masquées par défaut (bouton "Voir plus") -->
 				<div class="gallery-item more"><img src="assets/css/images/pont.jpg" alt="Aquarelle 4"><p>Et l'eau coule, encore, sous les ponts</p></div>
@@ -249,10 +254,12 @@
                     <span id="modalDimensions" class="modal-spec"></span>
                     <span class="dot-separator">•</span>
                     <span id="modalDisponibilite" class="modal-spec"></span>
+					<span class="dot-separator">•</span>
+					<span id="modalPrice" class="modal-spec"></span>
                 </div>
                 
                 <div class="modal-note">
-                    <p><em>Toutes nos aquarelles sont livrées encadrées avec soin. Les œuvres originales sont accompagnées de leur certificat d'authenticité signé.</em></p>
+                    <p><em>Toutes nos aquarelles sont livrées et encadrées avec soin. Les œuvres originales sont accompagnées de leur certificat d'authenticité signé.</em></p>
                 </div>
         
                 <div class="actions-row">
@@ -267,7 +274,7 @@
                 </div>
 
                 <div id="prixInputContainer" class="form-container" style="display: none;">
-                    <h4>Votre proposition :</h4>
+                    <p>Votre proposition :</p>
                     <div class="input-group">
                         <input type="text" id="proposedPrice" placeholder="Montant proposé (€)">
                         <input type="text" id="nameModalProposedPrice" placeholder="Votre prénom et nom">
@@ -285,6 +292,7 @@
                     
                     <div class="input-group">
                         <div class="checkbox-group inline">
+							<!--
                             <div class="custom-checkbox">
                                 <input type="checkbox" id="selectPriceCadre" name="cadre">
                                 <label for="selectPriceCadre">Avec cadre</label>
@@ -293,6 +301,7 @@
                                 <input type="checkbox" id="selectPriceSansCadre" name="sanscadre">
                                 <label for="selectPriceSansCadre">Sans cadre</label>
                             </div>
+							-->
                         </div>
                         <input type="text" id="nameModalPrice" placeholder="Votre prénom et nom">
                         <input type="email" id="emailModalPrice" placeholder="Votre plus belle adresse mail">
@@ -470,7 +479,8 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
         document.getElementById("modalPriceSansCadre").textContent = img.dataset.pricesanscadre || "";
         document.getElementById("modalText").textContent = img.dataset.description || "";
         document.getElementById("modalDimensions").textContent = img.dataset.dimensions ? "Dimensions : " + img.dataset.dimensions : "";
-        document.getElementById("modalDisponibilite").textContent = img.dataset.dispo ? "" + img.dataset.dispo : "";
+        document.getElementById("modalPrice").textContent = img.dataset.price ? "Prix d'un tirage : " + img.dataset.price : "";
+		document.getElementById("modalDisponibilite").textContent = img.dataset.dispo ? "" + img.dataset.dispo : "";
         
         changeModalImage(0);
     });
@@ -582,10 +592,26 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
 		// 2. Le branchement électrique (Maintenant qu'il les connaît, il peut les écouter)
 		prixCheckbox.addEventListener("change", function() {
 			prixInputContainer.style.display = prixCheckbox.checked ? "block" : "none";
+
+			// Étape B : L'animation de défilement (Uniquement si on COCHE la case)
+			if (prixCheckbox.checked) {
+				// On laisse 50 millisecondes au navigateur pour dessiner la boîte...
+				setTimeout(() => {
+					// ...puis on glisse doucement vers elle !
+					prixInputContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}, 50);
+			}
 		});
 
 		copieCheckbox.addEventListener("change", function() {
 			copieInputContainer.style.display = copieCheckbox.checked ? "block" : "none";
+
+			// Étape B : Animation de défilement
+				if (copieCheckbox.checked) {
+					setTimeout(() => {
+						copieInputContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+					}, 50);
+				}
 		});
 
 		// Cas 1 : Achat d'une oeuvre originale

@@ -3618,15 +3618,15 @@ input[type="checkbox"] + label::before, input[type="radio"] + label::before {
 .gallery-item:hover img { transform: scale(1.05) !important; }
 .gallery-item:hover p { opacity: 1; transform: translateY(0); }
 
-/* Lignes décoratives Bleu Marine */
-.scroll-line, .scroll-line2, .scroll-line3, .modal-line {
+/* Lignes décoratives Bleu Marine */ /* NB: la modal-line a été enlevée ici pour être définie plus bas*/ 
+.scroll-line, .scroll-line2, .scroll-line3 {
     background: linear-gradient(90deg, transparent, var(--bleu-marine), transparent) !important;
     height: 2px !important; border-radius: 0 !important; margin: 1em auto;
 }
 .scroll-line { width: 10px; }
 .scroll-line2 { width: 10%; max-width: 1000px; }
 .scroll-line3 { width: 10%; max-width: 300px; }
-.modal-line { width: 50%; margin: 0.5em 0 1.5em 0 !important; background: var(--bleu-marine) !important; }
+/* .modal-line { width: 10%; margin: 0.5em 0 1.5em 0 !important; background: var(--bleu-marine) !important; }
 
 
 /* --- 2. Boutons d'Action & Navigation --- */
@@ -3924,25 +3924,25 @@ input[type="checkbox"]:checked + label::before {
 /* 2. La ligne bleue décorative */
 .modal-line {
     margin-top: 0rem !important;
-    margin-bottom: 2rem !important; /* Espace entre la ligne et le texte descriptif */
+    margin-bottom: 0rem !important; /* Espace entre la ligne et le texte descriptif */
 }
 
 /* 3. Le texte de description (l'histoire de l'aquarelle) */
 .modal-description p {
-    margin-top: -2rem !important;
-    margin-bottom: 1.5rem !important; /* Espace sous le texte */
+    margin-top: 0rem !important;
+    margin-bottom: 0.5rem !important; /* Espace sous le texte */
 }
 
 /* 4. La ligne "Dimensions • Disponibilité" */
 .specs {
     margin-top: 0 !important;
-    margin-bottom: 2.5rem !important; /* Grand espace pour détacher cette info technique */
+    margin-bottom: 0.0rem !important; /* Grand espace pour détacher cette info technique */
 }
 
 /* 5. La petite note d'authenticité (le bloc avec le liseré bleu) */
 .modal-note {
     margin-top: 0 !important;
-    margin-bottom: 0.5rem !important; /* Espace avant d'arriver aux cases à cocher */
+    margin-bottom: 1rem !important; /* Espace avant d'arriver aux cases à cocher */
 }
 
 /* 6. Les cases à cocher (Tirage d'art / Œuvre originale) */
@@ -3979,10 +3979,15 @@ input[type="checkbox"]:checked + label::before {
 
 /* 5. La petite note d'authenticité (le bloc avec le liseré bleu) */
 .modal-note, .modal-note p {
-    font-size: 1.15rem !important; /* Plus petit pour faire "mention légale" discrète */
+    font-size: 0.85rem !important; /* Plus petit pour faire "mention légale" discrète */
 }
 
 /* 6. Le texte des cases à cocher */
 input[type="checkbox"] + label {
     font-size: 1.15rem !important; /* Bien lisible pour inciter à l'action */
+}
+
+/* 7. Texte du formulaire de la modale */
+.form-container, .form-container p, .form-container button {
+	font-size: 1.15rem !important
 }
