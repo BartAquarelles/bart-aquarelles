@@ -2186,7 +2186,7 @@ input, select, textarea {
 				text-rendering: auto;
 				line-height: 1;
 				text-transform: none !important;
-				font-family: 'Garamond';
+				font-family: 'Times New Roman';
 				font-weight: 900;
 
 				/* 1. On transforme le carré en boîte intelligente (Flexbox) */
@@ -3500,7 +3500,7 @@ input, select, textarea {
    ========================================= */
 
 /* --- 0. Atmosphère, Polices et Couleurs --- */
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Times New Roman:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap');
 
 :root {
     --papier-aquarelle: #fcfbf9;
@@ -3527,18 +3527,18 @@ body, #header, .is-preload body {
 
 /* Application globale des polices */
 body, h1, h2, h3, h4, h5, h6, p, a, div, input, button, select, textarea, label {
-    font-family: 'Garamond', serif !important;
+    font-family: 'Times New Roman', serif !important;
     color: var(--encre-douce) !important;
 }
 
 /* Quelques éléments spécifiques en police moderne pour le contraste */
 .side-menu, #contact p, label, .floating-btn, button.primary {
-    font-family: 'Garamond', sans-serif !important;
+    font-family: 'Times New Roman', sans-serif !important;
 }
 
 /* Sauvetage des icônes (Font Awesome) pour les cases à cocher */
 input[type="checkbox"] + label::before, input[type="radio"] + label::before {
-    font-family: 'Garamond' !important;
+    font-family: 'Times New Roman' !important;
 }
 
 /* --- SCROLLBAR SUR-MESURE --- */
@@ -3869,11 +3869,11 @@ button.primary:hover, input[type="submit"].primary:hover {
 
 
 /* =========================================
-   2. POLICE GARAMOND ABSOLUE
+   2. POLICE Times New Roman ABSOLUE
    ========================================= */
-/* On force le Garamond sur TOUTES les balises du site */
+/* On force le Times New Roman sur TOUTES les balises du site */
 * {
-    font-family: 'Garamond', 'Garamond', serif !important;
+    font-family: 'Times New Roman', 'Times New Roman', serif !important;
 }
 
 /* L'exception vitale : On protège la police des icônes pour les cases à cocher et le header ! */
@@ -3881,7 +3881,7 @@ input[type="checkbox"] + label::before,
 input[type="radio"] + label::before,
 .icon::before,
 .fas, .fab {
-    font-family: 'Garamond' !important;
+    font-family: 'Times New Roman' !important;
 }	
 
 /* =========================================
