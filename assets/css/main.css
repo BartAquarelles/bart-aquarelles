@@ -3991,3 +3991,41 @@ input[type="checkbox"] + label {
 .form-container, .form-container p, .form-container button {
 	font-size: 1.15rem !important
 }
+
+
+
+/* --- CHAPITRE 9 : RESPONSIVE DESIGN (Tablettes et Smartphones) --- */
+@media screen and (max-width: 980px) {
+    /* Colonnes réduites pour la grille */
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    
+    /* La Modale passe en vertical (Image au dessus, Texte en dessous) */
+    .modal-content-art { flex-direction: column !important; height: 90vh !important; }
+    .modal-left { flex: none !important; padding: 1rem 0 !important; }
+    #modalImage { max-height: 40vh !important; } 
+    
+    /* Affinage des boutons (croix et flèches) pour dégager l'aquarelle */
+    .nav-btn { width: 35px !important; height: 35px !important; font-size: 14px !important; }
+    #prevArt { left: 10px !important; } 
+    #nextArt { right: 10px !important; }
+    .close-button-modal { 
+        top: 10px !important; right: 10px !important; 
+        width: 35px !important; height: 35px !important; font-size: 16px !important; 
+    }
+    
+    /* Respiration et Typographie de la zone de texte */
+    .modal-right { padding: 1.5rem 1.5rem 2rem 1.5rem !important; }
+    .modal-right header.major h2 { font-size: 2rem !important; }
+    .modal-description p { font-size: 1.25rem !important; margin-top: -1rem !important; }
+    .specs { font-size: 0.95rem !important; line-height: 1.5 !important; margin-bottom: 1.5rem !important; }
+    .modal-note { font-size: 0.95rem !important; margin-bottom: 1.5rem !important; }
+    
+    /* Masquage de la barre de défilement épaisse (Inutile sur écran tactile) */
+    .modal-right::-webkit-scrollbar { display: none !important; }
+    .modal-right { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@media screen and (max-width: 736px) {
+    /* Étirement des boutons d'action au pouce */
+    button.primary, input[type="submit"].primary, .show-more { width: 100% !important; padding: 0 1em !important; }
+}
